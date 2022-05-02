@@ -1,5 +1,4 @@
-{% extends 'layout.html' %}
-{% block content %}
+{% extends 'layout.html' %} {% block content %}
 <div class="timeline">
   <div class="followings half">
     <h2>팔로잉 목록</h2>
@@ -12,19 +11,6 @@
     {% if user.Followers %} {% for follower in user.Followers %}
     <div>{{follower.nick}}</div>
     {% endfor %} {% endif %}
-  </div>
-</div>
-<div>
-  <h2>해시태그 추가하기</h2>
-  <div>
-    <form id="twit-form" action="/favor" method="post">
-      <div class="input-group">
-        <textarea id="twit" name="content" maxlength="140"></textarea>
-      </div>
-      <div>
-        <button id="twit-btn" type="submit" class="btn">짹짹</button>
-      </div>
-    </form>
   </div>
 </div>
 {% endblock %}
