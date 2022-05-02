@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="/main.css" />
     <link rel="stylesheet" href="/header.css" />
+
+    {% block style %} {% endblock %}
   </head>
   <body>
     <div class="top-bar">
@@ -15,7 +17,7 @@
       </div>
       <div class="link-btn">
         <a href="#">my방명록</a> |
-        <a href="#">해시태그</a>
+        <a href="/hashtagPage">해시태그</a>
       </div>
     </div>
     <div class="container">
