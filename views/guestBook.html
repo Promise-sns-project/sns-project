@@ -10,22 +10,13 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     /> -->
-    <link rel="stylesheet" href="/guestBook.css" />
-    <link rel="stylesheet" href="/header.css" />
     <title>guestBook</title>
   </head>
 
   <body>
-    <div class="top-bar">
-      <div class="logo">
-        <a href="/">PromiseSNS</a>
-      </div>
-      <div class="link-btn">
-        <a href="#">my방명록</a> |
-        <a href="/hashtagPage">해시태그</a>
-      </div>
-    </div>
-    {% if user %}
+    <link rel="stylesheet" href="/guestBook.css" />
+    <link rel="stylesheet" href="/header.css" />
+    {% extends 'layout.html' %} {% block content %} {% if user %}
     <h2>방명록</h2>
     <div class="input-container">
       <form
@@ -102,6 +93,7 @@
       </div>
       {% endfor %}
     </div>
+    {% endblock %}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       if (document.getElementById("formFile")) {
