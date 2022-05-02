@@ -15,9 +15,10 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
+  z-index: 3;
 }
 .link-btn {
   margin-top: 30px;
