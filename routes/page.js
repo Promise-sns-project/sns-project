@@ -18,7 +18,7 @@ router.get("/hashtagPage", isLoggedIn, (req, res) => {
   res.render("hashtagPage", { title: "Profile - prj-name" });
 });
 router.get("/profile", isLoggedIn, (req, res) => {
-  res.render("profile", { title: "Profile - prj-name" });
+  res.render("guestBook", { title: "Profile - prj-name" });
 });
 
 router.get("/join", isNotLoggedIn, (req, res) => {

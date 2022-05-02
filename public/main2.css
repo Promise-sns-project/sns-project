@@ -1,0 +1,17 @@
+.container {
+  margin-top: 100px;
+  display: flex;
+  padding: 20px;
+}
+.profile-wrap {
+  border: solid 1px black;
+  width: 40%;
+}
+.profile {
+  padding: 20px;
+}
+.timeline {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+}
