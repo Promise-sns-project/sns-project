@@ -14,9 +14,10 @@
   </head>
 
   <body>
+    {% extends 'layout.html' %} {% block content %} {% if user %}
+
     <link rel="stylesheet" href="/guestBook.css" />
     <link rel="stylesheet" href="/header.css" />
-    {% extends 'layout.html' %} {% block content %} {% if user %}
     <h2>방명록</h2>
     <div class="input-container">
       <form

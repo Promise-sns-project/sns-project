@@ -109,7 +109,6 @@ textarea {
   }
 }
 #twit-form {
-  border-bottom: 1px solid silver;
   padding: 10px;
   background: var(--color-blue);
   overflow: hidden;
