@@ -14,6 +14,9 @@ router.use((req, res, next) => {
   next();
 });
 
+router.get("/hashtagPage", isLoggedIn, (req, res) => {
+  res.render("hashtagPage", { title: "Profile - prj-name" });
+});
 router.get("/profile", isLoggedIn, (req, res) => {
   res.render("profile", { title: "Profile - prj-name" });
 });
