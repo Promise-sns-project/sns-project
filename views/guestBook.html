@@ -15,12 +15,26 @@
 
   <body>
     {% extends 'layout.html' %} {% block content %} {% if user %}
-
+    <style>
+      .profile-wrap {
+        display: none;
+      }
+    </style>
     <link rel="stylesheet" href="/guestBook.css" />
     <link rel="stylesheet" href="/header.css" />
-    <h2>방명록</h2>
+
+    <h2>{{userNick}}</h2>
     <h3>followingCount : {{user.Followings.length}}</h3>
+    <h3>팔로잉 목록</h3>
+    {% if user.Followings %} {% for following in user.Followings %}
+    <div>{{following.nick}}</div>
+    {% endfor %} {% endif %}
     <h3>followerCount : {{user.Followers.length}}</h3>
+    <h3>팔로워 목록</h3>
+    {% if user.Followers %} {% for follower in user.Followers %}
+    <div>{{follower.nick}}</div>
+    {% endfor %} {% endif %}
+    <h3>방명록</h3>
     <!-- <h3>user : {{following}}</h3> -->
     <div class="input-container">
       <form
