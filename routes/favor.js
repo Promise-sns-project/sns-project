@@ -56,12 +56,31 @@ router.get("/", isLoggedIn, async (req, res, next) => {
             },
         });
 
-        return res.render("hashtagPage", {
-            title: `!`,
-            user: user,
-            favors: favors,
-            // favor_hashtags,
-        });
+        let result = new Set();
+        (async () => {
+            let ids = [];
+            for (var i = 0; i < favor_hashtags.length; i++) {
+                const tmp = await favor_hashtags[i].getPosts({ include: [{ model: User }] });
+                // console.log(i, tmp);
+                await tmp.forEach((m) => {
+                    if (!ids.includes(m.dataValues.id)) {
+                        result.add(m);
+                        ids.push(m.dataValues.id);
+                    }
+                });
+                // tmp.forEach((m) => result.add(...m));
+                // console.log("tmp!!!", tmp);
+                // result.push(tmp);
+                await console.log("result!!!!!!!", i, result);
+            }
+            return res.render("hashtagPage", {
+                title: `hashtagPage`,
+                user,
+                favors,
+                favor_hashtags,
+                twits: result,
+            });
+        })();
     } catch (error) {
         console.log(error);
         next(error);
