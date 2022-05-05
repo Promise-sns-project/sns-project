@@ -20,26 +20,24 @@
     <link rel="stylesheet" href="/modal.css" />
 
     <div class="modal1 hidden">
-        <div class="modalBox">
-          <div id="x">
-            <button class="closeBtn1">✖</button>
-          </div>
-          <div>팔로우 목록</div>
-            <!{% if user.Followings %} {% for following in user.Followings %}
-            <div>{{following.nick}}</div> 
-          {% endfor %} 
-          {% endif %}
+      <div class="modalBox">
+        <div id="x">
+          <button class="closeBtn1">✖</button>
         </div>
+        <div>팔로우 목록</div>
+        {% if user.Followings %} {% for following in user.Followings %}
+        <div>{{following.nick}}</div>
+        {% endfor %} {% endif %}
+      </div>
     </div>
     <div class="modal2 hidden">
-        <div class="modalBox">
-          <button class="closeBtn2">✖</button>
-          <div>팔로워 목록</div>
-          {% if user.Followers %} {% for follower in user.Followers %}
-          <div>{{follower.nick}}</div> 
-          {% endfor %} 
-          {% endif %}
-          </div>
+      <div class="modalBox">
+        <button class="closeBtn2">✖</button>
+        <div>팔로워 목록</div>
+        {% if user.Followers %} {% for follower in user.Followers %}
+        <div>{{follower.nick}}</div>
+        {% endfor %} {% endif %}
+      </div>
     </div>
     <div class="profile-box">
       <img
@@ -49,10 +47,11 @@
       <div class="profile-info">
         <div class="nickname">{{userNick}}님의 프로필</div>
         <div class="follow-info">
-          <div class="follow-box openBtn1">팔로우 : {{user.Followings.length}}</div>
-            
+          <div class="follow-box openBtn1">
+            팔로우 : {{user.Followings.length}}
+          </div>
+
           <div class="openBtn2">팔로워 : {{user.Followers.length}}</div>
-          
         </div>
       </div>
     </div>
