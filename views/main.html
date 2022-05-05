@@ -28,6 +28,7 @@
     {% for twit in twits %}
     <div class="twit">
       <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
+      <input class="twit-writer" type="hidden" value="{{user.nick}}" class="twit-writer">
       <input type="hidden" value="{{twit.id}}" class="twit-id">
       <div class="twit-author" onclick="handleClick(event, `{{twit.User.id}}`)">{{twit.User.nick}}</div>
       {% if not followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}

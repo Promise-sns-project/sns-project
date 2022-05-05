@@ -37,6 +37,7 @@ const upload2 = multer();
 router.post("/:id", isLoggedIn, upload2.none(), async (req, res, next) => {
     try {
         const guestBook = await GuestBook.create({
+            writer: "writertest2",
             content: req.body.content,
             img: req.body.url,
             owner: req.params.id,

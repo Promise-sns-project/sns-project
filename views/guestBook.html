@@ -122,9 +122,10 @@
           class="twit-author"
           onclick="handleClick(event, `{{twit.User.id}}`)"
         >
-          {{guestBook.User.nick}}
+          닉네임: {{writer}}
         </div>
-        <div class="twit-content">{{guestBook.content}}</div>
+        <div class="twit-content">내용:<br> {{guestBook.content}}</div>
+        <div class="twit-createAt">작성시간:<br> {{guestBook.createdAt}}</div>
         {% if guestBook.img %}
         <div class="twit-img"><img src="{{guestBook.img}}" alt="섬네일" /></div>
         {% endif %}

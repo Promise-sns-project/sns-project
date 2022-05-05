@@ -4,6 +4,10 @@ module.exports = class GuestBook extends Sequelize.Model {
     static init(sequelize) {
         return super.init(
             {
+                writer: {
+                    type: Sequelize.STRING(140),
+                    allowNull: false,
+                },
                 content: {
                     type: Sequelize.STRING(140),
                     allowNull: false,
