@@ -57,10 +57,10 @@ router.get("/", isLoggedIn, async (req, res, next) => {
         });
 
         return res.render("hashtagPage", {
-            title: `hashtagPage`,
-            user,
-            favors,
-            favor_hashtags,
+            title: `!`,
+            user: user,
+            favors: favors,
+            // favor_hashtags,
         });
     } catch (error) {
         console.log(error);
