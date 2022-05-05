@@ -26,6 +26,7 @@ body {
   align-items: center;
   padding: 20px;
   width: 800px;
+  border-radius: 15px;
 }
 .profile-img {
   width: 150px;
@@ -49,6 +50,12 @@ body {
 .follow-box {
   margin-right: 30px;
 }
+.follow-box:hover {
+  font-size: larger;
+}
+.follower-box:hover {
+  font-size: larger;
+}
 .profile-wrap {
   display: none;
 }
@@ -56,7 +63,7 @@ body {
   width: 800px;
   height: auto;
   background: var(--color-blue);
-  border-radius: 8px;
+  border-radius: 15px;
   padding: 30px 50px;
   margin: 40px 0px;
 }
@@ -126,15 +133,33 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 15px;
 }
 
 .twit {
   height: auto;
   width: 80%;
   background-color: white;
-  margin-top: 15px;
+  margin-bottom: 30px;
   padding: 12px;
   border-radius: 4px;
   display: flex;
+  justify-content: space-between;
+}
+.twit:nth-child(1) {
+  margin-top: 30px;
+}
+.twit-author {
+  width: 10%;
+}
+.twit-createAt {
+  font-size: 10px;
+  width: 40%;
+  display: flex;
   align-items: center;
+}
+.twit-content {
+  word-break: break-all;
+  width: 50%;
+  font-size: 15px;
 }
