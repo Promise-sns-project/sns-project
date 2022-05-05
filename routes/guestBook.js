@@ -9,45 +9,45 @@ const { isLoggedIn } = require("./middlewares");
 const router = express.Router();
 
 try {
-    fs.readdirSync("uploads");
+  fs.readdirSync("uploads");
 } catch (error) {
-    console.error("uploads 폴더가 없어 uploads 폴더를 생성합니다.");
-    fs.mkdirSync("uploads");
+  console.error("uploads 폴더가 없어 uploads 폴더를 생성합니다.");
+  fs.mkdirSync("uploads");
 }
 
 const upload = multer({
-    storage: multer.diskStorage({
-        destination(req, file, cb) {
-            cb(null, "uploads/");
-        },
-        filename(req, file, cb) {
-            const ext = path.extname(file.originalname);
-            cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
-        },
-    }),
-    limits: { fileSize: 5 * 1024 * 1024 },
+  storage: multer.diskStorage({
+    destination(req, file, cb) {
+      cb(null, "uploads/");
+    },
+    filename(req, file, cb) {
+      const ext = path.extname(file.originalname);
+      cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 router.post("/img", isLoggedIn, upload.single("img"), (req, res) => {
-    console.log("###############", req.file);
-    res.json({ url: `/img/${req.file.filename}` });
+  console.log("###############", req.file);
+  res.json({ url: `/img/${req.file.filename}` });
 });
 
 const upload2 = multer();
 router.post("/:id", isLoggedIn, upload2.none(), async (req, res, next) => {
-    try {
-        const guestBook = await GuestBook.create({
-            writer: "writertest2",
-            content: req.body.content,
-            img: req.body.url,
-            owner: req.params.id,
-            UserId: req.user.id,
-        });
-        res.redirect(`/${req.params.id}/guestBook`);
-    } catch (error) {
-        console.log(error);
-        next(error);
-    }
+  try {
+    const guestBook = await GuestBook.create({
+      writer: req.user.nick,
+      content: req.body.content,
+      img: req.body.url,
+      owner: req.params.id,
+      UserId: req.user.id,
+    });
+    res.redirect(`/${req.params.id}/guestBook`);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 });
 
 module.exports = router;

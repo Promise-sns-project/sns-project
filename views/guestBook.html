@@ -32,7 +32,7 @@
     </div>
     <div class="modal2 hidden">
       <div class="modalBox">
-        <button class="closeBtn2">✖</button>
+        <button id="x" class="closeBtn2">✖</button>
         <div>팔로워 목록</div>
         {% if user.Followers %} {% for follower in user.Followers %}
         <div>{{follower.nick}}</div>
@@ -124,8 +124,14 @@
         >
           닉네임: {{writer}}
         </div>
-        <div class="twit-content">내용:<br> {{guestBook.content}}</div>
-        <div class="twit-createAt">작성시간:<br> {{guestBook.createdAt}}</div>
+        <div class="twit-content">
+          내용:<br />
+          {{guestBook.content}}
+        </div>
+        <div class="twit-createAt">
+          작성시간:<br />
+          {{guestBook.createdAt}}
+        </div>
         {% if guestBook.img %}
         <div class="twit-img"><img src="{{guestBook.img}}" alt="섬네일" /></div>
         {% endif %}

@@ -28,8 +28,6 @@ router.get("/join", isNotLoggedIn, (req, res) => {
 
 router.get("/:id/guestBook", isLoggedIn, async (req, res, next) => {
   try {
-
-
     const targetUser = await User.findOne({
       where: { id: req.params.id },
       include: [
@@ -54,7 +52,7 @@ router.get("/:id/guestBook", isLoggedIn, async (req, res, next) => {
         title: "guestBook page",
         user: targetUser,
         userNick: targetUser.nick,
-        writer: "WriterTest", //현재 로그인(세션) 닉네임 writer변수에 넣어줘야함 
+        writer: req.user.nick, //현재 로그인(세션) 닉네임 writer변수에 넣어줘야함
         //방법 1. User-guestBook 조인해서 닉네임 가져오기
         //방법 2. session에서 닉네임 추출
 
