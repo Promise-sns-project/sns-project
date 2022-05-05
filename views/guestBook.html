@@ -15,26 +15,47 @@
 
   <body>
     {% extends 'layout.html' %} {% block content %} {% if user %}
-    <style>
-      .profile-wrap {
-        display: none;
-      }
-    </style>
     <link rel="stylesheet" href="/guestBook.css" />
     <link rel="stylesheet" href="/header.css" />
+    <link rel="stylesheet" href="/modal.css" />
 
-    <h2>{{userNick}}</h2>
-    <h3>followingCount : {{user.Followings.length}}</h3>
-    <h3>팔로잉 목록</h3>
-    {% if user.Followings %} {% for following in user.Followings %}
-    <div>{{following.nick}}</div>
-    {% endfor %} {% endif %}
-    <h3>followerCount : {{user.Followers.length}}</h3>
-    <h3>팔로워 목록</h3>
-    {% if user.Followers %} {% for follower in user.Followers %}
-    <div>{{follower.nick}}</div>
-    {% endfor %} {% endif %}
-    <h3>방명록</h3>
+    <div class="modal1 hidden">
+        <div class="modalBox">
+          <div id="x">
+            <button class="closeBtn1">✖</button>
+          </div>
+          <div>팔로우 목록</div>
+            <!{% if user.Followings %} {% for following in user.Followings %}
+            <div>{{following.nick}}</div> 
+          {% endfor %} 
+          {% endif %}
+        </div>
+    </div>
+    <div class="modal2 hidden">
+        <div class="modalBox">
+          <button class="closeBtn2">✖</button>
+          <div>팔로워 목록</div>
+          {% if user.Followers %} {% for follower in user.Followers %}
+          <div>{{follower.nick}}</div> 
+          {% endfor %} 
+          {% endif %}
+          </div>
+    </div>
+    <div class="profile-box">
+      <img
+        class="profile-img"
+        src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/신짱구.png/230px-신짱구.png"
+      />
+      <div class="profile-info">
+        <div class="nickname">{{userNick}}님의 프로필</div>
+        <div class="follow-info">
+          <div class="follow-box openBtn1">팔로우 : {{user.Followings.length}}</div>
+            
+          <div class="openBtn2">팔로워 : {{user.Followers.length}}</div>
+          
+        </div>
+      </div>
+    </div>
     <!-- <h3>user : {{following}}</h3> -->
     <div class="input-container">
       <form
