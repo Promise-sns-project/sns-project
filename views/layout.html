@@ -64,29 +64,6 @@
           alert(new URL(location.href).searchParams.get("loginError"));
         }
       };
-
-      const open1 = () => {
-        document.querySelector(".modal1").classList.remove("hidden");
-      };
-
-      const close1 = () => {
-        document.querySelector(".modal1").classList.add("hidden");
-      };
-
-      document.querySelector(".openBtn1").addEventListener("click", open1);
-      document.querySelector(".closeBtn1").addEventListener("click", close1);
-
-      const open2 = () => {
-        document.querySelector(".modal2").classList.remove("hidden");
-      };
-
-      const close2 = () => {
-        document.querySelector(".modal2").classList.add("hidden");
-      };
-
-      document.querySelector(".openBtn2").addEventListener("click", open2);
-      document.querySelector(".closeBtn2").addEventListener("click", close2);
-      document.querySelector(".bg").addEventListener("click", close);
     </script>
     {% block script %} {% endblock %}
   </body>

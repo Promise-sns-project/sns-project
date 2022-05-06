@@ -144,6 +144,7 @@
     </div>
     {% endblock %}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    {% block script %}
     <script>
       if (document.getElementById("formFile")) {
         console.log("!!!!!!!!!!!!!!");
@@ -165,6 +166,29 @@
               });
           });
       }
+
+      const open1 = () => {
+        document.querySelector(".modal1").classList.remove("hidden");
+      };
+
+      const close1 = () => {
+        document.querySelector(".modal1").classList.add("hidden");
+      };
+
+      document.querySelector(".openBtn1").addEventListener("click", open1);
+      document.querySelector(".closeBtn1").addEventListener("click", close1);
+
+      const open2 = () => {
+        document.querySelector(".modal2").classList.remove("hidden");
+      };
+
+      const close2 = () => {
+        document.querySelector(".modal2").classList.add("hidden");
+      };
+
+      document.querySelector(".openBtn2").addEventListener("click", open2);
+      document.querySelector(".closeBtn2").addEventListener("click", close2);
     </script>
+    {% endblock %}
   </body>
 </html>
