@@ -29,7 +29,12 @@
         </div>
         {% if user.Followings %} {% for following in user.Followings %}
         <div class="modalBox-content">
-          <div class="modalBox-nick">{{following.nick}}</div>
+          <div
+            class="modalBox-nick"
+            onclick="handleClick(event, `{{following.id}}`)"
+          >
+            {{following.nick}}
+          </div>
         </div>
         {% endfor %} {% endif %}
       </div>
@@ -42,7 +47,12 @@
         </div>
         {% if user.Followers %} {% for follower in user.Followers %}
         <div class="modalBox-content">
-          <div class="modalBox-nick">{{follower.nick}}</div>
+          <div
+            class="modalBox-nick"
+            onclick="handleClick(event, `{{follower.id}}`)"
+          >
+            {{follower.nick}}
+          </div>
         </div>
         {% endfor %} {% endif %}
       </div>
