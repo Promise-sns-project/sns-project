@@ -45,18 +45,17 @@ router.get("/", isLoggedIn, async (req, res, next) => {
                 },
             ],
         });
-        const favors = user.Favors.map((m) => m.favor);
-        console.log("favors!!", favors);
+        const favors = user.Favors.map((m) => m.favor); // 사용자의 favor들 array
 
         const favor_hashtags = await Hashtag.findAll({
             where: {
                 title: {
-                    [Op.in]: favors,
+                    [Op.in]: favors, // TODO: like operation 적용해야 함
                 },
             },
         });
 
-        let result = new Set();
+        let result = new Set(); // 그냥 array로 해도 되긴 함...
         (async () => {
             let ids = [];
             for (var i = 0; i < favor_hashtags.length; i++) {
@@ -68,10 +67,6 @@ router.get("/", isLoggedIn, async (req, res, next) => {
                         ids.push(m.dataValues.id);
                     }
                 });
-                // tmp.forEach((m) => result.add(...m));
-                // console.log("tmp!!!", tmp);
-                // result.push(tmp);
-                await console.log("result!!!!!!!", i, result);
             }
             return res.render("hashtagPage", {
                 title: `hashtagPage`,
