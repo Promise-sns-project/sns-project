@@ -3,41 +3,160 @@
   .profile-wrap {
     display: none;
   }
+
+  #tagTwits {
+    display: none;
+  }
+
+  .btn-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .btn {
+    width: 155px;
+    height: 60px;
+    border: none;
+    border-bottom: 3px solid #e2e2e2;
+    border-radius: 0px;
+    font-size: 17px;
+  }
+
+  #addTagBtn {
+    border-bottom: 3px solid black;
+    font-weight: bold;
+  }
+
+  #textarea {
+    width: 480px;
+    outline: none;
+    height: 40px;
+  }
+
+  #twit-form {
+    display: flex;
+    margin-bottom: 88px;
+    display: flex;
+    align-items: center;
+    width: 600px;
+    margin: 0 auto;
+    justify-content: center;
+    border-radius: 3px;
+  }
+
+  #twit-btn {
+    width: 80px;
+    height: 40px;
+    margin-left: 9px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .favors {
+    margin: 80px 80px;
+  }
+
+  #favor {
+    margin: 13px 0px;
+    font-weight: bold;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+  }
+
+  #myTagsDiv {
+    padding-bottom: 80px;
+  }
+
+  #tag {
+    border-radius: 50%;
+    border: 1px solid #c8c8c8;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 8px;
+    font-size: 22px;
+  }
 </style>
 {% endblock %} {% block content %}
 <div>
-  <h2>해시태그 키워드 추가</h2>
-  <div>
-    <form id="twit-form" action="/favor" method="post">
-      <div class="input-group">
-        <textarea id="twit" name="content" maxlength="140"></textarea>
-      </div>
+  <div class="btn-wrap">
+    <button id="addTagBtn" class="btn">키워드 추가</button>
+    <button id="myTagTwitsBtn" class="btn">키워드 글</button>
+  </div>
+  <div id="myTagsDiv">
+    <div>
+      <form id="twit-form" action="/favor" method="post">
+        <textarea id="textarea" name="content" maxlength="140"></textarea>
+
+        <div>
+          <button id="twit-btn" type="submit">추가</button>
+        </div>
+      </form>
+    </div>
+    <!-- <h2>나의 해시태그 목록</h2> -->
+    <div class="favors">
+      {% for favor in favors %}
       <div>
-        <button id="twit-btn" type="submit" class="btn">추가</button>
+        <div id="favor">
+          <div id="tag">#</div>
+          {{favor}}
+        </div>
       </div>
-    </form>
+      {% endfor %}
+    </div>
   </div>
-  <h2>나의 해시태그 목록</h2>
-  {% for favor in favors %}
-  <div>
-    <div>{{favor}}</div>
+  <div id="tagTwits">
+    <!-- <h2>모아보기</h2> -->
+    {% for twit in twits %}
+    <div class="twit">
+      <input type="hidden" value="{{twit.User.id}}" class="twit-user-id" />
+      <input type="hidden" value="{{twit.id}}" class="twit-id" />
+      <div class="twit-author" onclick="handleClick(event, `{{twit.User.id}}`)">
+        {{twit.User.nick}}
+      </div>
+      {% if not followerIdList.includes(twit.User.id) and twit.User.id !==
+      user.id %}
+      <button class="twit-follow">팔로우하기</button>
+      {% endif %}
+      <div class="twit-content">{{twit.content}}</div>
+      {% if twit.img %}
+      <div class="twit-img"><img src="{{twit.img}}" alt="섬네일" /></div>
+      {% endif %}
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-  <h2>모아보기</h2>
-  {% for twit in twits %}
-  <div class="twit">
-    <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
-    <input type="hidden" value="{{twit.id}}" class="twit-id">
-    <div class="twit-author" onclick="handleClick(event, `{{twit.User.id}}`)">{{twit.User.nick}}</div>
-    {% if not followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}
-    <button class="twit-follow">팔로우하기</button>
-    {% endif %}
-    <div class="twit-content">{{twit.content}}</div>
-    {% if twit.img %}
-    <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
-    {% endif %}
-  </div>
-  {% endfor %}
 </div>
+
+<script>
+  console.log("hashtagPage");
+
+  const myTagsDiv = document.getElementById("myTagsDiv");
+  const tagTwits = document.getElementById("tagTwits");
+
+  const addTagBtn = document.getElementById("addTagBtn");
+  const myTagTwitsBtn = document.getElementById("myTagTwitsBtn");
+  addTagBtn.addEventListener("click", () => {
+    myTagsDiv.style.display = "block";
+    tagTwits.style.display = "none";
+    myTagTwitsBtn.style.borderBottom = "3px solid #e2e2e2";
+    addTagBtn.style.borderBottom = "3px solid  #001d6e";
+    addTagBtn.style.fontWeight = "bold";
+    myTagTwitsBtn.style.fontWeight = "normal";
+  });
+
+  myTagTwitsBtn.addEventListener("click", () => {
+    tagTwits.style.display = "block";
+    myTagsDiv.style.display = "none";
+    addTagBtn.style.borderBottom = "3px solid #e2e2e2";
+    myTagTwitsBtn.style.borderBottom = "3px solid  #001d6e";
+    myTagTwitsBtn.style.fontWeight = "bold";
+    addTagBtn.style.fontWeight = "normal";
+  });
+</script>
 
 {% endblock %}
