@@ -8,13 +8,15 @@
   --color-light-blue: #c4ddff;
   --font-size-btn: 12px;
 }
-
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   margin-top: 80px;
+}
+.pointer {
+  cursor: pointer;
 }
 .btn {
   display: inline-block;

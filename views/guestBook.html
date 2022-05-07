@@ -24,12 +24,17 @@
         <div class="modalBox-title">
           <div style="padding-top: 40px; padding-left: 212px">팔로우 목록</div>
           <div id="x">
-            <button class="closeBtn1">✖</button>
+            <button class="closeBtn1 pointer">✖</button>
           </div>
         </div>
         {% if user.Followings %} {% for following in user.Followings %}
         <div class="modalBox-content">
-          <div class="modalBox-nick">{{following.nick}}</div>
+          <div
+            class="modalBox-nick pointer"
+            onclick="handleClick(event, `{{following.id}}`)"
+          >
+            {{following.nick}}
+          </div>
         </div>
         {% endfor %} {% endif %}
       </div>
@@ -38,11 +43,16 @@
       <div class="modalBox">
         <div class="modalBox-title">
           <div style="padding-top: 40px; padding-left: 212px">팔로워 목록</div>
-          <div id="x"><button class="closeBtn2">✖</button></div>
+          <div id="x"><button class="closeBtn2 pointer">✖</button></div>
         </div>
         {% if user.Followers %} {% for follower in user.Followers %}
         <div class="modalBox-content">
-          <div class="modalBox-nick">{{follower.nick}}</div>
+          <div
+            class="modalBox-nick pointer"
+            onclick="handleClick(event, `{{follower.id}}`)"
+          >
+            {{follower.nick}}
+          </div>
         </div>
         {% endfor %} {% endif %}
       </div>
@@ -55,11 +65,11 @@
       <div class="profile-info">
         <div class="nickname">{{userNick}}님의 프로필</div>
         <div class="follow-info">
-          <div class="follow-box openBtn1">
+          <div class="follow-box openBtn1 pointer">
             팔로우 : <strong>{{user.Followings.length}}</strong>
           </div>
 
-          <div class="follower-box openBtn2">
+          <div class="follower-box openBtn2 pointer">
             팔로워 : <strong>{{user.Followers.length}}</strong>
           </div>
         </div>
@@ -129,8 +139,8 @@
         />
         <input type="hidden" value="{{guestBook.id}}" class="twit-id" />
         <div
-          class="twit-author"
-          onclick="handleClick(event, `{{twit.User.id}}`)"
+          class="twit-author pointer"
+          onclick="handleClick(event, `{{guestBook.UserId}}`)"
         >
           {{guestBook.writer}}
         </div>
