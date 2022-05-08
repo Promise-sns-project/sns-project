@@ -47,16 +47,21 @@ router.get("/", isLoggedIn, async (req, res, next) => {
         });
         const favors = user.Favors.map((m) => m.favor); // 사용자의 favor들 array
 
-        const favor_hashtags = await Hashtag.findAll({
-            where: {
-                title: {
-                    [Op.in]: favors, // TODO: like operation 적용해야 함
-                },
-            },
-        });
-
+        let favor_hashtags = [];
         let result = new Set(); // 그냥 array로 해도 되긴 함...
         (async () => {
+            for (var i = 0; i < favors.length; i++) {
+                const tmp = await Hashtag.findAll({
+                    where: {
+                        title: {
+                            [Op.like]: `%${favors[i]}%`,
+                        },
+                    },
+                });
+                favor_hashtags.push(...tmp);
+            }
+            // console.log("!!!result!!", favor_hashtags);
+
             let ids = [];
             for (var i = 0; i < favor_hashtags.length; i++) {
                 const tmp = await favor_hashtags[i].getPosts({ include: [{ model: User }] });
@@ -68,6 +73,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
                     }
                 });
             }
+            console.log("twits!!", result);
             return res.render("hashtagPage", {
                 title: `hashtagPage`,
                 user,
