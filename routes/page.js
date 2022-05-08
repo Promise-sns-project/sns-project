@@ -41,23 +41,16 @@ router.get("/:id/guestBook", isLoggedIn, async (req, res, next) => {
         },
       ],
     });
-    console.log("result", targetUser);
 
     if (targetUser) {
-      // 해당 유저의 방명록을 불러오면 됨
       const guestBooks = await GuestBook.findAll({
         where: { owner: targetUser.id },
       });
       res.render("guestBook", {
         title: "guestBook page",
         user: targetUser,
-        id: targetUser.id,
         userNick: targetUser.nick,
-        writer: req.user.nick, //현재 로그인(세션) 닉네임 writer변수에 넣어줘야함
-        //방법 1. User-guestBook 조인해서 닉네임 가져오기
-        //방법 2. session에서 닉네임 추출
-
-        // targetUser_follow,
+        writer: req.user.nick,
         guestBooks,
       });
     } else {

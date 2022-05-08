@@ -91,6 +91,7 @@
             maxlength="140"
             placeholder="방명록을 작성하세요."
           ></textarea>
+          <input id="writer" type="hidden" value="{{writer}}" />
           <!-- <label for="floatingTextarea">leave a comment</label> -->
         </div>
         <div class="img-preview">
@@ -142,7 +143,7 @@
           class="twit-author pointer"
           onclick="handleClick(event, `{{guestBook.UserId}}`)"
         >
-          {{guestBook.writer}}
+        닉네임 : {{guestBook.writer}}
         </div>
         <div class="twit-content">{{guestBook.content}}</div>
         <div class="twit-createAt">{{guestBook.createdAt}}</div>
@@ -156,6 +157,12 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% block script %}
     <script>
+      
+      const handleClick = (e, userId) => {
+        console.log(userId);
+        document.location.href = `/${userId}/guestBook`;
+      }
+      
       if (document.getElementById("formFile")) {
         console.log("!!!!!!!!!!!!!!");
         document
