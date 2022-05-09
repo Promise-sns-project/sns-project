@@ -73,6 +73,10 @@
             팔로워 : <strong>{{user.Followers.length}}</strong>
           </div>
         </div>
+        {% if not followerIdList.includes(user.id) and user.id !== login_user.id
+        %}
+        <button class="twit-follow">팔로우하기</button>
+        {% endif %}
       </div>
     </div>
     <!-- <h3>user : {{following}}</h3> -->
@@ -163,13 +167,8 @@
       console.log("date:", date.innerText.slice(0, 24));
       date.innerText = date.innerText.slice(0, 24);
 
-      const fulldate = date.innerText.slice(0, 24);
+      //const fulldate = date.innerText.slice(0, 24);
       //console.log(date.getMonth());
-
-      const handleClick = (e, userId) => {
-        console.log(userId);
-        document.location.href = `/${userId}/guestBook`;
-      };
 
       if (document.getElementById("formFile")) {
         console.log("!!!!!!!!!!!!!!");
