@@ -11,13 +11,13 @@
   </head>
 
   <body>
+    <div class="bg hidden"></div>
     <div class="top-bar">
       <div class="logo">
-        <a href="/">PromiseSNS</a>
-      </div>
-      <div class="link-btn">
-        <a href="/{{user.id}}/guestBook">my방명록</a> |
-        <a href="/favor">해시태그</a>
+        <a href="/">
+          <img class="icon" src="/pinky-promise.png" />
+          <span>PromiseSNS</span></a
+        >
       </div>
     </div>
     <div class="container">
@@ -38,6 +38,7 @@
             >내 프로필</a
           >
           <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+          <a href="/favor" class="btn">#해시태그</a>
           {% else %}
           <form id="login-form" action="/auth/login" method="post">
             <div class="input-group">

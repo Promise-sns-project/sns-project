@@ -82,11 +82,11 @@ textarea {
   }
 }
 .profile {
+  height: 150px;
   text-align: left;
   padding: 10px;
   margin-right: 10px;
   border-radius: 4px;
-  border: 1px solid silver;
   background: var(--color-blue);
 }
 .user-name {
@@ -111,7 +111,9 @@ textarea {
   }
 }
 #twit-form {
+  height: 150px;
   padding: 10px;
+  border-radius: 4px;
   background: var(--color-blue);
   overflow: hidden;
 }
@@ -182,7 +184,8 @@ textarea {
   text-align: center;
 }
 #hashtag-form {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
   margin: 8px 0px;
 }
 footer {
