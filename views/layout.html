@@ -68,10 +68,6 @@
           alert(new URL(location.href).searchParams.get("loginError"));
         }
       };
-      const handleClick = (e, userId) => {
-        console.log(userId);
-        document.location.href = `/${userId}/guestBook`;
-      };
     </script>
     {% block script %} {% endblock %}
   </body>

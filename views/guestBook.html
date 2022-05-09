@@ -62,6 +62,7 @@
         class="profile-img"
         src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/신짱구.png/230px-신짱구.png"
       />
+      <input type="hidden" value="{{login_user.id}}" class="login-user-id" />
       <div class="profile-info">
         <div class="nickname">{{userNick}}님의 프로필</div>
         <div class="follow-info">
@@ -73,6 +74,10 @@
             팔로워 : <strong>{{user.Followers.length}}</strong>
           </div>
         </div>
+        {% if not followerIdList.includes(user.id) and user.id !== login_user.id
+        %}
+        <button class="twit-follow">팔로우하기</button>
+        {% endif %}
       </div>
     </div>
     <!-- <h3>user : {{following}}</h3> -->
@@ -133,17 +138,12 @@
     <div class="twits">
       {% for guestBook in guestBooks %}
       <div class="twit">
-        <input
-          type="hidden"
-          value="{{guestBook.User.id}}"
-          class="twit-user-id"
-        />
         <input type="hidden" value="{{guestBook.id}}" class="twit-id" />
         <div
           class="twit-author pointer"
           onclick="handleClick(event, `{{guestBook.UserId}}`)"
         >
-        닉네임 : {{guestBook.writer}}
+          {{guestBook.writer}}
         </div>
         <div class="twit-content">{{guestBook.content}}</div>
         <div class="twit-createAt">{{guestBook.createdAt}}</div>
@@ -157,12 +157,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% block script %}
     <script>
-      
-      const handleClick = (e, userId) => {
-        console.log(userId);
-        document.location.href = `/${userId}/guestBook`;
-      }
-      
       if (document.getElementById("formFile")) {
         console.log("!!!!!!!!!!!!!!");
         document
@@ -183,7 +177,26 @@
               });
           });
       }
-
+      document.querySelectorAll(".twit-follow").forEach(function (tag) {
+        tag.addEventListener("click", function () {
+          const guestBook_Id = document.querySelector("#my-id");
+          if (guestBook_Id) {
+            const userId = document.querySelector(".login-user-id").value;
+            if (userId !== guestBook_Id.value) {
+              if (confirm("팔로잉하시겠습니까?")) {
+                axios
+                  .post(`/user/${guestBook_Id.value}/follow`)
+                  .then(() => {
+                    location.reload();
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                  });
+              }
+            }
+          }
+        });
+      });
       const open1 = () => {
         document.querySelector(".modal1").classList.remove("hidden");
       };

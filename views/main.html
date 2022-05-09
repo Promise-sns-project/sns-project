@@ -44,10 +44,7 @@
         class="twit-writer"
       />
       <input type="hidden" value="{{twit.id}}" class="twit-id" />
-      <div
-        class="twit-author pointer"
-        onclick="handleClick(event, `{{twit.User.id}}`)"
-      >
+      <div class="twit-author" onclick="handleClick(event, `{{twit.User.id}}`)">
         {{twit.User.nick}}
       </div>
       {% if not followerIdList.includes(twit.User.id) and twit.User.id !==
@@ -64,12 +61,6 @@
 </div>
 {% endblock %} {% block script %}
 <script>
-  const handleClick = (e, userId) => {
-    console.log(userId);
-    document.location.href = `/${userId}/guestBook`;
-
-  }
-  
   if (document.getElementById("img")) {
     document.getElementById("img").addEventListener("change", function (e) {
       const formData = new FormData();

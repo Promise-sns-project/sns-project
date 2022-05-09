@@ -51,6 +51,7 @@ router.get("/:id/guestBook", isLoggedIn, async (req, res, next) => {
         user: targetUser,
         userNick: targetUser.nick,
         writer: req.user.nick,
+        login_user: req.user,
         guestBooks,
       });
     } else {
