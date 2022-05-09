@@ -143,9 +143,10 @@
           class="twit-author pointer"
           onclick="handleClick(event, `{{guestBook.UserId}}`)"
         >
-        닉네임 : {{guestBook.writer}}
+          닉네임 : {{guestBook.writer}}
         </div>
         <div class="twit-content">{{guestBook.content}}</div>
+        <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
         <div class="twit-createAt">{{guestBook.createdAt}}</div>
         {% if guestBook.img %}
         <div class="twit-img"><img src="{{guestBook.img}}" alt="섬네일" /></div>
@@ -157,12 +158,19 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% block script %}
     <script>
-      
+      const date = document.querySelector(".twit-createAt");
+      console.log(date);
+      console.log("date:", date.innerText.slice(0, 24));
+      date.innerText = date.innerText.slice(0, 24);
+
+      const fulldate = date.innerText.slice(0, 24);
+      //console.log(date.getMonth());
+
       const handleClick = (e, userId) => {
         console.log(userId);
         document.location.href = `/${userId}/guestBook`;
-      }
-      
+      };
+
       if (document.getElementById("formFile")) {
         console.log("!!!!!!!!!!!!!!");
         document
