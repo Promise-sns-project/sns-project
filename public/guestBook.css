@@ -171,7 +171,8 @@ body {
   font-size: 15px;
 }
 
-.guest-follow-btn {
+.guest-follow-btn,
+.guest-unfollow-btn {
   width: 86px;
   height: 30px;
   /* border: 1px solid rgba(0, 0, 0, 0.2); */
