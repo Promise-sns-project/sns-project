@@ -73,7 +73,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
                     }
                 });
             }
-            console.log("twits!!", result);
+            // console.log("twits!!", result);
             return res.render("hashtagPage", {
                 title: `hashtagPage`,
                 user,
@@ -84,6 +84,35 @@ router.get("/", isLoggedIn, async (req, res, next) => {
         })();
     } catch (error) {
         console.log(error);
+        next(error);
+    }
+});
+
+router.delete("/", isLoggedIn, async (req, res, next) => {
+    try {
+        const user = await User.findOne({
+            where: { id: req.user.id },
+            include: [
+                {
+                    model: Favor,
+                },
+            ],
+        });
+
+        (async () => {
+            const user_favors = await user.Favors;
+            let target;
+
+            for (var i = 0; i < user_favors.length; i++) {
+                if (user_favors[i].dataValues.favor.trim() === req.body.favor) {
+                    target = user_favors[i];
+                }
+            }
+            target.destroy();
+            // console.log("target", target);
+        })();
+    } catch (error) {
+        console.log("ERROR!!!", error);
         next(error);
     }
 });
