@@ -22,7 +22,11 @@
     <div class="modal1 hidden">
       <div class="modalBox">
         <div class="modalBox-title">
-          <div style="padding-top: 40px; padding-left: 212px">팔로우 목록</div>
+          <div
+            style="padding-top: 40px; padding-left: 212px; font-weight: bold"
+          >
+            팔로우 목록
+          </div>
           <div id="x">
             <button class="closeBtn1 pointer">✖</button>
           </div>
@@ -42,7 +46,11 @@
     <div class="modal2 hidden">
       <div class="modalBox">
         <div class="modalBox-title">
-          <div style="padding-top: 40px; padding-left: 212px">팔로워 목록</div>
+          <div
+            style="padding-top: 40px; padding-left: 212px; font-weight: bold"
+          >
+            팔로워 목록
+          </div>
           <div id="x"><button class="closeBtn2 pointer">✖</button></div>
         </div>
         {% if user.Followers %} {% for follower in user.Followers %}
@@ -158,10 +166,9 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% block script %}
     <script>
-      const date = document.querySelector(".twit-createAt");
-      console.log(date);
-      console.log("date:", date.innerText.slice(0, 24));
-      date.innerText = date.innerText.slice(0, 24);
+      document.querySelectorAll(".twit-createAt").forEach((tag) => {
+        tag.innerText = tag.innerText.slice(0, 24);
+      });
 
       //const fulldate = date.innerText.slice(0, 24);
       //console.log(date.getMonth());
@@ -208,10 +215,12 @@
       });
       const open1 = () => {
         document.querySelector(".modal1").classList.remove("hidden");
+        document.querySelector(".bg").classList.remove("hidden");
       };
 
       const close1 = () => {
         document.querySelector(".modal1").classList.add("hidden");
+        document.querySelector(".bg").classList.add("hidden");
       };
 
       document.querySelector(".openBtn1").addEventListener("click", open1);
@@ -219,10 +228,12 @@
 
       const open2 = () => {
         document.querySelector(".modal2").classList.remove("hidden");
+        document.querySelector(".bg").classList.remove("hidden");
       };
 
       const close2 = () => {
         document.querySelector(".modal2").classList.add("hidden");
+        document.querySelector(".bg").classList.add("hidden");
       };
 
       document.querySelector(".openBtn2").addEventListener("click", open2);

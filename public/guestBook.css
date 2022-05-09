@@ -140,7 +140,6 @@ body {
   height: auto;
   width: 80%;
   background-color: white;
-  margin-bottom: 30px;
   padding: 12px;
   border-radius: 4px;
   display: flex;
@@ -159,4 +158,12 @@ body {
   word-break: break-all;
   width: 50%;
   font-size: 15px;
+}
+.bg {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
 }

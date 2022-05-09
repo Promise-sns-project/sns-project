@@ -27,17 +27,21 @@ a {
   z-index: 3;
 }
 .link-btn {
-  margin-top: 30px;
-  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.link-btn a {
-  font-weight: bold;
-  color: rgb(120, 120, 120);
+.logo {
+  position: relative;
 }
-.link-btn a:hover {
-  color: black;
+.icon {
+  height: 50px;
 }
-.logo a {
+
+.logo a span {
   font-size: 60px;
   font-weight: bold;
+  position: absolute;
+  top: -4px;
+  left: 51px;
 }
