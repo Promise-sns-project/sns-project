@@ -153,19 +153,17 @@
     const config = {
       method: "delete",
       // url: url + `/fooding/admin/restaurant/${restId}/reservation`,
-      url: `/favor`,
+      url: `/favor/delete`,
       data: {
         favor: target
       },
     };
     await axios(config)
       .then((response) => {
-        console.log("response!~", response.data)
+        console.log("response!~", response)
       }).catch((err) => {
         console.error(err);
       });
-
-    console.log("!!",);
 
   }
 

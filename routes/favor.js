@@ -88,7 +88,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     }
 });
 
-router.delete("/", isLoggedIn, async (req, res, next) => {
+router.delete("/delete", isLoggedIn, async (req, res, next) => {
     try {
         const user = await User.findOne({
             where: { id: req.user.id },
@@ -99,17 +99,20 @@ router.delete("/", isLoggedIn, async (req, res, next) => {
             ],
         });
 
+        let target;
         (async () => {
             const user_favors = await user.Favors;
-            let target;
 
             for (var i = 0; i < user_favors.length; i++) {
                 if (user_favors[i].dataValues.favor.trim() === req.body.favor) {
                     target = user_favors[i];
                 }
             }
-            target.destroy();
+            // console.log("target", target.user_favor);
+            await target.user_favor.destroy();
+
             // console.log("target", target);
+            await res.redirect("/");
         })();
     } catch (error) {
         console.log("ERROR!!!", error);
