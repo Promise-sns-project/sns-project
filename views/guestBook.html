@@ -234,6 +234,7 @@
 
       document.querySelector(".openBtn1").addEventListener("click", open1);
       document.querySelector(".closeBtn1").addEventListener("click", close1);
+      document.querySelector(".bg").addEventListener("click", close1);
 
       const open2 = () => {
         document.querySelector(".modal2").classList.remove("hidden");
@@ -247,6 +248,8 @@
 
       document.querySelector(".openBtn2").addEventListener("click", open2);
       document.querySelector(".closeBtn2").addEventListener("click", close2);
+      document.querySelector(".bg").addEventListener("click", close2);
+
     </script>
     {% endblock %}
   </body>
