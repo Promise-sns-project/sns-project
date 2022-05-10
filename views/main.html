@@ -36,7 +36,11 @@
       {% if not followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}
       <button class="twit-follow">팔로우하기</button>
       {% endif %}
-      <div class="twit-content">{{twit.content}} <span id="like" onclick="handleLike(event)">🤍</span> </div>
+      <div class="twit-content">
+        {{twit.content}}
+        <span id="like" onclick="handleLike(event)"> 🤍 </span>
+        <span>{{twit.post_like.length}}</span>
+      </div>
       <!-- 🧡 -->
       {% if twit.img %}
       <div class="twit-img"><img src="{{twit.img}}" alt="섬네일" /></div>
