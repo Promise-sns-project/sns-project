@@ -88,7 +88,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     }
 });
 
-router.delete("/delete", isLoggedIn, async (req, res, next) => {
+router.post("/delete", isLoggedIn, async (req, res, next) => {
     try {
         const user = await User.findOne({
             where: { id: req.user.id },
@@ -112,7 +112,7 @@ router.delete("/delete", isLoggedIn, async (req, res, next) => {
             await target.user_favor.destroy();
 
             // console.log("target", target);
-            await res.redirect("/");
+            await res.redirect("/favor");
         })();
     } catch (error) {
         console.log("ERROR!!!", error);
