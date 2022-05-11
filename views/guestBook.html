@@ -163,6 +163,15 @@
         <div class="twit-content">{{guestBook.content}}</div>
         <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
         <div class="twit-createAt">{{guestBook.createdAt}}</div>
+        <div>
+          <button 
+          style="background-color: red;"
+          type="submit"
+          class="btn btn-secondary"
+          onclick="location.href='/guestBook/delete/{{guestBook.id}}/{{nowuserId}}'">
+          삭제
+        </button>
+        </div>
         {% if guestBook.img %}
       
           <!-- <div class="twit-img">

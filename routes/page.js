@@ -46,6 +46,8 @@ router.get("/:id/guestBook", isLoggedIn, async (req, res, next) => {
             });
             res.render("guestBook", {
                 title: "guestBook page",
+                //nowuserId는 현재 보고있는 방명록 주인의 id
+                nowuserId: req.params.id, 
                 user: targetUser,
                 userNick: targetUser.nick,
                 writer: req.user.nick,
