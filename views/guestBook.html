@@ -92,6 +92,14 @@
             <button class="guest-unfollow-btn">팔로우취소</button>
           </div>
           {% endif %}
+          {%if user.id == login_user.id%}
+          <div>
+            <form id = "profile-form" action="/user/profile" method="post">
+              <input name="nick">
+              <button>프로필 변경</button>
+            </form>
+          </div>
+          {% endif %}
       </div>
     </div>
     <!-- <h3>user : {{following}}</h3> -->
