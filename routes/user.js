@@ -1,9 +1,25 @@
 const express = require("express");
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
 const { isLoggedIn } = require("./middlewares");
 const User = require("../models/user");
 
 const router = express.Router();
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, cb) {
+      cb(null, "uploads/");
+    },
+    filename(req, file, cb) {
+      const ext = path.extname(file.originalname);
+      cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
 
 router.post("/:id/follow", isLoggedIn, async (req, res, next) => {
   try {
@@ -35,7 +51,7 @@ router.post("/:id/unfollow", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/profile", async (req, res, next) => {
+router.post("/profile", isLoggedIn, async (req, res, next) => {
   try {
     await User.update(
       { nick: req.body.nick },
@@ -43,6 +59,28 @@ router.post("/profile", async (req, res, next) => {
         where: { id: req.user.id },
       }
     );
+    res.redirect(`/${req.user.id}/guestBook`);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.post("/img", isLoggedIn, upload.single("img"), (req, res) => {
+  console.log("req.file :", req.file);
+  res.json({ url: `/img/${req.file.filename}` });
+});
+
+const upload2 = multer();
+router.post("/profile", isLoggedIn, upload2.none(), async (req, res, next) => {
+  try {
+    await User.update(
+      { img: req.body.url },
+      {
+        where: { id: req.user.id },
+      }
+    );
+
     res.redirect(`/${req.user.id}/guestBook`);
   } catch (error) {
     console.error(error);
