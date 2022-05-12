@@ -72,19 +72,26 @@ router.post("/img", isLoggedIn, upload.single("img"), (req, res) => {
 });
 
 const upload2 = multer();
-router.post("/profile", isLoggedIn, upload2.none(), async (req, res, next) => {
-  try {
-    await User.update(
-      { img: req.body.url },
-      {
-        where: { id: req.user.id },
-      }
-    );
+router.post(
+  "/profileImg",
+  isLoggedIn,
+  upload2.none(),
+  async (req, res, next) => {
+    console.log("url:", req.body.url);
 
-    res.redirect(`/${req.user.id}/guestBook`);
-  } catch (error) {
-    console.error(error);
-    next(error);
+    try {
+      await User.update(
+        { img: req.body.url },
+        {
+          where: { id: req.user.id },
+        }
+      );
+      // res.status(200).json();
+      res.redirect(`/${req.user.id}/guestBook`);
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
   }
-});
+);
 module.exports = router;
