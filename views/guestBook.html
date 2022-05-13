@@ -206,8 +206,9 @@
         </div>
         <div class="twit-content">{{guestBook.content}}</div>
         <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
-        <div class="twit-createAt">{{guestBook.createdAt}}</div>
-        {% if guestBook.writer == login_user.nick or userNick == login_user.nick %}
+        <div id="twit-createAt" class="twit-createAt">{{guestBook.createdAt}}</div>
+        {% if guestBook.UserId == login_user.id or userNick == login_user.nick %}
+        <!-- 방명록을 쓴 User 이거나 내 방명록 페이지면 -> 수정삭제 가능 -->
         <button 
           id="modify"
           type="submit"
@@ -247,11 +248,11 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% block script %}
     <script>
-
       function clickModify() {
         document.getElementById("inputForm").style.display = "inline";
         document.getElementById("deleteBtn").style.display = "none";
         document.getElementById("modify").style.display = "none";
+        document.getElementById("twit-createAt").style.display = "none";
       }
 
       function clickmodifyCancel(){
