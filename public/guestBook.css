@@ -32,7 +32,7 @@ body {
   width: 150px;
   height: 150px;
   object-fit: fill;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 50%;
 }
 .profile-info {
@@ -222,4 +222,11 @@ body {
   justify-content: center;
   align-items: center;
   background: transparent;
+}
+
+#makeBasicProfile {
+  width: 90px;
+  /* color: var(----color-dark-blue);
+  background-color: white;
+  border: 1px solid var(----color-dark-blue); */
 }

@@ -68,17 +68,17 @@
     <div class="profile-box">
 
       {% if profileImg %}
-      <!-- <img
-        class="profile-img"
-        src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/신짱구.png/230px-신짱구.png"
-      /> -->
+    
       <img
       class="profile-img"
       src="{{profileImg}}"
     />
 
+      {% else %}
+         <img class="profile-img"
+         src = http://kaihuastudio.com/common/img/default_profile.png />
+
       {% endif %}
-      
       <input type="hidden" value="{{login_user.id}}" class="login-user-id" />
       <div class="profile-info">
         <div class="nickname">{{userNick}}</div>
@@ -112,7 +112,7 @@
     </div>
 
     <div class="profileChange-div hidden">
-      <h2>프로필 수정</h2>
+      <h2 style = "weight: 700">프로필 수정</h2>
       <form id = "profile-form" action="/user/profile" method="post">
         <input placeholder="변경할 닉네임을 작성하세요" name="nick"> <button class= "btn">입력</button>
       </form>
@@ -127,12 +127,13 @@
           />
           <input id="img-url" type="hidden" name="url" />
         </div>
-        <div>
-          <label id="img-label" for="img">사진 선택</label>
-          <input id="img" type="file" accept="image/*" />
-          <button id="profile-btn" type="submit" class="btn">변경</button>
+        <div style="display:flex">
+          <label id="img-label" for="img" style="margin-right: 5px">사진 선택</label>
+          <input id="img" type="file"   accept="image/*" />
+          <button id="profile-btn" type="submit" class="btn"  style="margin-right: 5px">변경</button>
+          <button id ="makeBasicProfile" class ="btn">기본 프로필</button>
         </div>
-        
+     
       
       </form>
     </div>
@@ -366,6 +367,19 @@
   profileChangeBtn.addEventListener("click", showChangeProfile);
 
 
+
+
+  document.getElementById("makeBasicProfile").addEventListener("click", function(e){
+    axios
+                  .post(`/user/`)
+                  .then(() => {
+                    location.reload();
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                  });
+  })
+  
     </script>
     {% endblock %}
   </body>
