@@ -47,25 +47,31 @@
         class="twit-writer"
       />
       <input type="hidden" value="{{twit.id}}" class="twit-id" />
-      <div
-        class="twit-author pointer"
-        onclick="handleClick(event, `{{twit.User.id}}`)"
-      >
+      <div class="twit-author">
         {% if twit.User.img %}
-
-        <img class="profile-wrap-img" src="{{twit.User.img}}" />
-
-        {% else %} <img class="profile-wrap-img" src =
-        http://kaihuastudio.com/common/img/default_profile.png /> {% endif %}
-        <span style="margin-right: 10px">{{twit.User.nick}} </span>{% if user.id
-        === twit.User.id %}
-        <button class="twit-delete"><img src="/x.png" /></button>
-        {% endif %} {% if not followerIdList.includes(twit.User.id) and
-        twit.User.id !== user.id %}
-        <button class="twit-follow">팔로우하기</button>
+        <span class="pointer" onclick="handleClick(event, `{{twit.User.id}}`)">
+          <img class="profile-wrap-img pointer" src="{{twit.User.img}}" />
+        </span>
+        {% else %}
+        <span class="pointer" onclick="handleClick(event, `{{twit.User.id}}`)">
+          <img class="profile-wrap-img" src =
+          http://kaihuastudio.com/common/img/default_profile.png /></span
+        >
         {% endif %}
+        <span
+          class="pointer"
+          onclick="handleClick(event, `{{twit.User.id}}`)"
+          style="margin-right: 10px"
+          >{{twit.User.nick}}
+        </span>
       </div>
-      {% if twit.img %}
+      {% if user.id === twit.User.id %}
+      <button class="twit-delete"><img src="/x.png" /></button>
+      {% endif %} {% if not followerIdList.includes(twit.User.id) and
+      twit.User.id !== user.id %}
+      <button class="twit-follow">팔로우하기</button>
+      {% endif %} {% if twit.img %}
+
       <div class="twit-img"><img src="{{twit.img}}" alt="섬네일" /></div>
       {% endif %}
       <div style="padding: 0 60px; border-top: solid 1px silver">
