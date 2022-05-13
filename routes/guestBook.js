@@ -66,4 +66,24 @@ router.get("/delete/:id/:nowid", async (req, res, next) => {
   }
 });
 
+
+router.post("/update/:id/:nowid", async (req, res, next) => {
+  try {
+    console.log("pmgt"+req.body.contentUpdate);
+    var id = parseInt(req.params.id)
+    await GuestBook.update(
+      {
+        content : req.body.contentUpdate
+      },
+      {
+        where: {id:id}
+      }
+    );
+    res.redirect(`/${req.params.nowid}/guestBook`);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
 module.exports = router;

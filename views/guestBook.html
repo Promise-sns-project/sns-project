@@ -208,14 +208,29 @@
         <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
         <div class="twit-createAt">{{guestBook.createdAt}}</div>
         {% if guestBook.writer == login_user.nick or userNick == login_user.nick %}
+        <button 
+          id="modify"
+          type="submit"
+          class="btn btn-secondary"
+          onclick="clickModify()">
+          수정
+        </button>
         <div style="display:flex; align-items:center;">
           <button 
-
+          id="deleteBtn"
           type="submit"
           class="btn btn-secondary deleteBtn"
           onclick="location.href='/guestBook/delete/{{guestBook.id}}/{{nowuserId}}'">
           <img src = "/x.png" width="12px" height="12px"/>
         </button>
+        <form id=inputForm style="display: none;" action="/guestBook/update/{{guestBook.id}}/{{nowuserId}}" method="post">
+          <table>
+              <tr>
+                  <td><input type="text" name="contentUpdate" ></td>
+              </tr>
+          </table>
+          <input type="submit" value="수정완료">
+      </form>
         </div>
         {% endif %}
         {% if guestBook.img %}
@@ -232,6 +247,24 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% block script %}
     <script>
+
+      function clickModify() {
+        document.getElementById("inputForm").style.display = "inline";
+        document.getElementById("deleteBtn").style.display = "none";
+        document.getElementById("modify").style.display = "none";
+      }
+
+      function clickmodifyCancel(){
+        document.getElementById("inputForm").style.display = "none";
+        document.getElementById("deleteBtn").style.display = "inline";
+        document.getElementById("modify").style.display = "inline";
+      }
+
+      function clickOK() {
+        document.getElementById("modify").style.display = "inline";
+        document.getElementById("input").style.display = "none";
+      }
+
       document.querySelectorAll(".twit-createAt").forEach(function (x) {
         // console.log(date);
         // console.log("date:", date.innerText.slice(0, 24));
