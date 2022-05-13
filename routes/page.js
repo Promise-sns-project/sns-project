@@ -83,9 +83,6 @@ router.get("/", async (req, res, next) => {
       order: [["createdAt", "DESC"]],
     });
 
-    // console.log("@@@@@ ", await posts[0].getPost_like({ include: [{ model: User }] }));
-    console.log("!!!!@", posts[0].post_like);
-
     await res.render("main", {
       title: "prj-name",
       twits: posts,

@@ -110,8 +110,25 @@ textarea {
     width: 500px;
   }
 }
+.twit-content {
+  padding: 10px 0;
+}
+.twit-edit {
+  padding-top: 10px;
+}
+.twit-delete {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.twit-delete img {
+  width: 10px;
+  height: 10px;
+}
 #twit-form {
-  height: 150px;
   padding: 10px;
   border-radius: 4px;
   background: var(--color-blue);
@@ -119,6 +136,7 @@ textarea {
 }
 #img-preview {
   max-width: 100%;
+  height: 250px;
 }
 #img-label {
   float: left;
@@ -168,6 +186,8 @@ textarea {
 }
 .twit-img {
   text-align: center;
+  border-bottom: solid 1px silver;
+  padding: 10px 0;
 }
 .twit-img img {
   max-width: 75%;

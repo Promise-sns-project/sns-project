@@ -198,6 +198,7 @@
         <div class="twit-content">{{guestBook.content}}</div>
         <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
         <div class="twit-createAt">{{guestBook.createdAt}}</div>
+        {% if guestBook.writer == login_user.nick or userNick == login_user.nick %}
         <div>
           <button 
           style="background-color: red;"
@@ -207,6 +208,7 @@
           삭제
         </button>
         </div>
+        {% endif %}
         {% if guestBook.img %}
       
           <!-- <div class="twit-img">

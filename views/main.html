@@ -17,6 +17,7 @@
           src=""
           style="display: none"
           width="250"
+          height="250"
           alt="미리보기"
         />
         <input id="img-url" type="hidden" name="url" />
@@ -52,21 +53,20 @@
       >
         {{twit.User.nick}}
       </div>
-      {% if not followerIdList.includes(twit.User.id) and twit.User.id !==
-      user.id %}
-      <button class="twit-follow">팔로우하기</button>
-      {% endif %}
-      <div class="twit-content">
-        {{twit.content}}
-        <span id="like" onclick="handleLike(event)"> 🤍 </span>
-        <span>{{twit.post_like.length}}</span>
-      </div>
-      <!-- 🧡 -->
       {% if user.id === twit.User.id %}
-      <button class="twit-delete">삭제</button>
+      <button class="twit-delete"><img src="/x.png" /></button>
+      {% endif %} {% if not followerIdList.includes(twit.User.id) and
+      twit.User.id !== user.id %}
+      <button class="twit-follow">팔로우하기</button>
       {% endif %} {% if twit.img %}
       <div class="twit-img"><img src="{{twit.img}}" alt="섬네일" /></div>
       {% endif %}
+      <div class="twit-content">{{twit.content}}</div>
+      <!-- 🧡 -->
+      <div class="twit-edit">
+        <span id="like" onclick="handleLike(event)"> ❤️ </span>
+        <span>{{twit.post_like.length}}</span>
+      </div>
     </div>
     {% endfor %}
   </div>
