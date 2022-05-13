@@ -50,14 +50,13 @@ router.post("/:id", isLoggedIn, upload2.none(), async (req, res, next) => {
   }
 });
 
-
 //nowid는 현재 보고있는 방명록 주인의 id
 router.get("/delete/:id/:nowid", async (req, res, next) => {
-  req.body.c
+  req.body.c;
   try {
-    var id = parseInt(req.params.id)
+    var id = parseInt(req.params.id);
     await GuestBook.destroy({
-      where: {id:id}
+      where: { id: id },
     });
     res.redirect(`/${req.params.nowid}/guestBook`);
   } catch (error) {
@@ -66,16 +65,15 @@ router.get("/delete/:id/:nowid", async (req, res, next) => {
   }
 });
 
-
 router.post("/update/:id/:nowid", async (req, res, next) => {
   try {
-    var id = parseInt(req.params.id)
+    var id = parseInt(req.params.id);
     await GuestBook.update(
       {
-        content : req.body.contentUpdate
+        content: req.body.contentUpdate,
       },
       {
-        where: {id:id}
+        where: { id: id },
       }
     );
     res.redirect(`/${req.params.nowid}/guestBook`);

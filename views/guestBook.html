@@ -213,7 +213,7 @@
           id="modify"
           type="submit"
           class="btn btn-secondary"
-          onclick="clickModify()">
+          onclick="clickModify(event)">
           수정
         </button>
         <div style="display:flex; align-items:center;">
@@ -223,15 +223,15 @@
           class="btn btn-secondary deleteBtn"
           onclick="location.href='/guestBook/delete/{{guestBook.id}}/{{nowuserId}}'">
           <img src = "/x.png" width="12px" height="12px"/>
-        </button>
-        <form id=inputForm style="display: none;" action="/guestBook/update/{{guestBook.id}}/{{nowuserId}}" method="post">
-          <table>
-              <tr>
-                  <td><input type="text" name="contentUpdate" ></td>
-              </tr>
-          </table>
-          <input type="submit" value="수정완료">
-      </form>
+          </button>
+            <form value="hi"id=inputForm style="display: none;" action="/guestBook/update/{{guestBook.id}}/{{nowuserId}}" method="post">
+              <table>
+                  <tr>
+                      <td><input type="text" name="contentUpdate" ></td>
+                  </tr>
+              </table>
+              <input type="submit" value="수정완료">
+            </form>
         </div>
         {% endif %}
         {% if guestBook.img %}
@@ -248,11 +248,12 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% block script %}
     <script>
-      function clickModify() {
-        document.getElementById("inputForm").style.display = "inline";
-        document.getElementById("deleteBtn").style.display = "none";
-        document.getElementById("modify").style.display = "none";
-        document.getElementById("twit-createAt").style.display = "none";
+      function clickModify(e) {
+      const target = e.target.parentNode.children[5].children[1];
+        target.style.display = "inline"; //inputForm
+        target.parentNode.children[0].style.display = "none"; //deleteBtn
+        e.target.style.display = "none"; //modify
+        e.target.parentNode.children[3].style.display = "none"; //twit-createAt
       }
 
       function clickmodifyCancel(){
