@@ -61,33 +61,13 @@ textarea {
 .input-group input {
   width: 70%;
 }
-.half {
-  float: left;
-  width: 50%;
-  margin: 10px 0;
-}
 #join {
   float: right;
 }
-.profile-wrap {
-  width: 100%;
-  display: inline-block;
-  vertical-align: top;
-  margin: 10px 0;
-}
-@media screen and (min-width: 800px) {
-  .profile-wrap {
-    width: 290px;
-    margin-bottom: 0;
-  }
-}
 .profile {
-  height: 150px;
-  text-align: left;
-  padding: 10px;
-  margin-right: 10px;
-  border-radius: 4px;
-  background: var(--color-blue);
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
 }
 .user-name {
   font-weight: bold;
