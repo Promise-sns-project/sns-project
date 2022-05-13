@@ -59,7 +59,8 @@ textarea {
   }
 }
 .input-group {
-  margin-bottom: 10px;
+  width: 300px;
+  margin-bottom: 5px;
 }
 .input-group label {
   width: 25%;
@@ -67,38 +68,39 @@ textarea {
 }
 .input-group input {
   width: 70%;
-}
-.half {
-  float: left;
-  width: 50%;
-  margin: 10px 0;
+  height: 30px;
 }
 #join {
   float: right;
 }
 .profile-wrap {
-  width: 100%;
-  display: inline-block;
-  vertical-align: top;
-  margin: 10px 0;
+  display: none;
 }
-@media screen and (min-width: 800px) {
-  .profile-wrap {
-    width: 290px;
-    margin-bottom: 0;
-  }
+#login {
+  font-size: 16px;
+  background: none;
+  border: none;
 }
-.profile {
-  height: 150px;
-  text-align: left;
-  padding: 10px;
+#login-form {
+  width: 550px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.profile-wrap-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   margin-right: 10px;
-  border-radius: 4px;
-  background: var(--color-blue);
 }
 .user-name {
+  height: 30px;
+  display: flex;
+  align-items: center;
   font-weight: bold;
   font-size: 18px;
+  padding-right: 30px;
+  border-right: solid 1px black;
 }
 .count {
   font-weight: bold;
@@ -113,8 +115,14 @@ textarea {
   vertical-align: top;
 }
 @media screen and (min-width: 800px) {
+  .profile-wrap {
+    width: 360px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
   .timeline {
-    width: 500px;
+    width: 100%;
   }
 }
 .twit-content {
@@ -136,6 +144,7 @@ textarea {
   height: 10px;
 }
 #twit-form {
+  height: 200px;
   padding: 10px;
   border-radius: 4px;
   background: var(--color-blue);
@@ -162,6 +171,7 @@ textarea {
 }
 #twit {
   width: 100%;
+  height: 130px;
   min-height: 72px;
 }
 #twit-btn {
@@ -178,7 +188,10 @@ textarea {
   margin-bottom: 10px;
 }
 .twit-author {
-  display: inline-block;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
   font-weight: bold;
   margin-right: 10px;
 }
@@ -193,7 +206,6 @@ textarea {
 }
 .twit-img {
   text-align: center;
-  border-bottom: solid 1px silver;
   padding: 10px 0;
 }
 .twit-img img {

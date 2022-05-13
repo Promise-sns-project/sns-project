@@ -8,7 +8,7 @@
       method="post"
       enctype="multipart/form-data"
     >
-      <div class="input-group">
+      <div>
         <textarea id="twit" name="content" maxlength="140"></textarea>
       </div>
       <div class="img-preview">
@@ -51,21 +51,30 @@
         class="twit-author pointer"
         onclick="handleClick(event, `{{twit.User.id}}`)"
       >
-        {{twit.User.nick}}
+        {% if twit.User.img %}
+
+        <img class="profile-wrap-img" src="{{twit.User.img}}" />
+
+        {% else %} <img class="profile-wrap-img" src =
+        http://kaihuastudio.com/common/img/default_profile.png /> {% endif %}
+        <span style="margin-right: 10px">{{twit.User.nick}} </span>{% if user.id
+        === twit.User.id %}
+        <button class="twit-delete"><img src="/x.png" /></button>
+        {% endif %} {% if not followerIdList.includes(twit.User.id) and
+        twit.User.id !== user.id %}
+        <button class="twit-follow">팔로우하기</button>
+        {% endif %}
       </div>
-      {% if user.id === twit.User.id %}
-      <button class="twit-delete"><img src="/x.png" /></button>
-      {% endif %} {% if not followerIdList.includes(twit.User.id) and
-      twit.User.id !== user.id %}
-      <button class="twit-follow">팔로우하기</button>
-      {% endif %} {% if twit.img %}
+      {% if twit.img %}
       <div class="twit-img"><img src="{{twit.img}}" alt="섬네일" /></div>
       {% endif %}
-      <div class="twit-content">{{twit.content}}</div>
-      <!-- 🧡 -->
-      <div class="twit-edit">
-        <span id="like" onclick="handleLike(event)"> ❤️ </span>
-        <span>{{twit.post_like.length}}</span>
+      <div style="padding: 0 50px; border-top: solid 1px silver">
+        <div class="twit-content">{{twit.content}}</div>
+        <!-- 🧡 -->
+        <div class="twit-edit">
+          <span id="like" onclick="handleLike(event)"> ❤️ </span>
+          <span>{{twit.post_like.length}}</span>
+        </div>
       </div>
     </div>
     {% endfor %}

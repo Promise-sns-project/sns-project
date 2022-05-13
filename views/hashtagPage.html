@@ -1,9 +1,5 @@
 {% extends 'layout.html' %} {% block style %}
 <style>
-  .profile-wrap {
-    display: none;
-  }
-
   #tagTwits {
     display: none;
   }
@@ -155,18 +151,18 @@
       // url: url + `/fooding/admin/restaurant/${restId}/reservation`,
       url: `/favor/delete`,
       data: {
-        favor: target
+        favor: target,
       },
     };
     await axios(config)
       .then((response) => {
-        console.log("response!~", response)
+        console.log("response!~", response);
         window.location = "/favor";
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.error(err);
       });
-
-  }
+  };
 
   addTagBtn.addEventListener("click", () => {
     myTagsDiv.style.display = "block";
