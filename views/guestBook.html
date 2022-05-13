@@ -66,10 +66,19 @@
       </div>
     </div>
     <div class="profile-box">
-      <img
+
+      {% if profileImg %}
+      <!-- <img
         class="profile-img"
         src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/신짱구.png/230px-신짱구.png"
-      />
+      /> -->
+      <img
+      class="profile-img"
+      src="{{profileImg}}"
+    />
+
+      {% endif %}
+      
       <input type="hidden" value="{{login_user.id}}" class="login-user-id" />
       <div class="profile-info">
         <div class="nickname">{{userNick}}</div>
@@ -87,7 +96,37 @@
         <div>
           <button class="guest-follow-btn">팔로우하기</button>
         </div>
-        {% endif %}
+        {% elif followerIdList.includes(user.id) %}
+          <div>
+            <button class="guest-unfollow-btn">팔로우취소</button>
+          </div>
+          {% endif %}
+          {%if user.id == login_user.id%}
+          <div>
+            <form id = "profile-form" action="/user/profile" method="post">
+              <input name="nick"> <button class= "btn">닉네임 변경</button>
+            </form>
+            <form id = "profileImg-form" action="/user/profileImg" method="post" enctype="multipart/form-data">
+              <div class="img-preview">
+                <img
+                  id="img-preview"
+                  src=""
+                  style="display: none"
+                  width="250"
+                  alt="미리보기"
+                />
+                <input id="img-url" type="hidden" name="url" />
+              </div>
+              <div>
+                <label id="img-label" for="img">사진 업로드</label>
+                <input id="img" type="file" accept="image/*" />
+                <button id="profile-btn" type="submit" class="btn">게시</button>
+              </div>
+              
+            
+            </form>
+          </div>
+          {% endif %}
       </div>
     </div>
     <!-- <h3>user : {{following}}</h3> -->
@@ -159,6 +198,17 @@
         <div class="twit-content">{{guestBook.content}}</div>
         <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
         <div class="twit-createAt">{{guestBook.createdAt}}</div>
+        {% if guestBook.writer == login_user.nick or userNick == login_user.nick %}
+        <div>
+          <button 
+          style="background-color: red;"
+          type="submit"
+          class="btn btn-secondary"
+          onclick="location.href='/guestBook/delete/{{guestBook.id}}/{{nowuserId}}'">
+          삭제
+        </button>
+        </div>
+        {% endif %}
         {% if guestBook.img %}
       
           <!-- <div class="twit-img">
@@ -202,7 +252,7 @@
               });
           });
       }
-      document.querySelectorAll(".twit-follow").forEach(function (tag) {
+      document.querySelectorAll(".guest-follow-btn").forEach(function (tag) {
         tag.addEventListener("click", function () {
           const guestBook_Id = document.querySelector("#my-id");
           if (guestBook_Id) {
@@ -211,6 +261,26 @@
               if (confirm("팔로잉하시겠습니까?")) {
                 axios
                   .post(`/user/${guestBook_Id.value}/follow`)
+                  .then(() => {
+                    location.reload();
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                  });
+              }
+            }
+          }
+        });
+      });
+      document.querySelectorAll(".guest-unfollow-btn").forEach(function (tag) {
+        tag.addEventListener("click", function () {
+          const guestBook_Id = document.querySelector("#my-id");
+          if (guestBook_Id) {
+            const userId = document.querySelector(".login-user-id").value;
+            if (userId !== guestBook_Id.value) {
+              if (confirm("언팔로잉하시겠습니까?")) {
+                axios
+                  .post(`/user/${guestBook_Id.value}/unfollow`)
                   .then(() => {
                     location.reload();
                   })
@@ -249,6 +319,27 @@
       document.querySelector(".openBtn2").addEventListener("click", open2);
       document.querySelector(".closeBtn2").addEventListener("click", close2);
       document.querySelector(".bg").addEventListener("click", close2);
+
+
+      if (document.getElementById("img")) {
+    document.getElementById("img").addEventListener("change", function (e) {
+      const formData = new FormData();
+      console.log(this, this.files);
+      formData.append("img", this.files[0]);
+      axios
+        .post("/user/img", formData)
+        .then((res) => {
+          console.log(res);
+          document.getElementById("img-url").value = res.data.url;
+          document.getElementById("img-preview").src = res.data.url;
+          document.getElementById("img-preview").style.display = "inline";
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
+  }
+
 
     </script>
     {% endblock %}

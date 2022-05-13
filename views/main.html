@@ -8,7 +8,7 @@
       method="post"
       enctype="multipart/form-data"
     >
-      <div class="input-group">
+      <div>
         <textarea id="twit" name="content" maxlength="140"></textarea>
       </div>
       <div class="img-preview">
@@ -17,6 +17,7 @@
           src=""
           style="display: none"
           width="250"
+          height="250"
           alt="미리보기"
         />
         <input id="img-url" type="hidden" name="url" />
@@ -50,22 +51,58 @@
         class="twit-author pointer"
         onclick="handleClick(event, `{{twit.User.id}}`)"
       >
-        {{twit.User.nick}}
+        {% if twit.User.img %}
+
+        <img class="profile-wrap-img" src="{{twit.User.img}}" />
+
+        {% else %} <img class="profile-wrap-img" src =
+        http://kaihuastudio.com/common/img/default_profile.png /> {% endif %}
+        <span style="margin-right: 10px">{{twit.User.nick}} </span>{% if user.id
+        === twit.User.id %}
+        <button class="twit-delete"><img src="/x.png" /></button>
+        {% endif %} {% if not followerIdList.includes(twit.User.id) and
+        twit.User.id !== user.id %}
+        <button class="twit-follow">팔로우하기</button>
+        {% endif %}
       </div>
-      {% if not followerIdList.includes(twit.User.id) and twit.User.id !==
-      user.id %}
-      <button class="twit-follow">팔로우하기</button>
-      {% endif %}
-      <div class="twit-content">{{twit.content}}</div>
       {% if twit.img %}
       <div class="twit-img"><img src="{{twit.img}}" alt="섬네일" /></div>
       {% endif %}
+      <div style="padding: 0 50px; border-top: solid 1px silver">
+        <div class="twit-content">{{twit.content}}</div>
+        <!-- 🧡 -->
+        <div class="twit-edit">
+          <span id="like" onclick="handleLike(event)"> ❤️ </span>
+          <span>{{twit.post_like.length}}</span>
+        </div>
+      </div>
     </div>
     {% endfor %}
   </div>
 </div>
 {% endblock %} {% block script %}
 <script>
+  document.querySelectorAll(".twit-delete").forEach(function (tag) {
+    tag.addEventListener("click", function () {
+      const myId = document.querySelector("#my-id");
+      const twitId = tag.parentNode.querySelector(".twit-id").value;
+      const userId = tag.parentNode.querySelector(".twit-user-id").value;
+
+      if (userId === myId.value) {
+        if (confirm("게시글을 삭제하시겠습니까?")) {
+          axios
+            .delete(`/post/${twitId}`)
+            .then(() => {
+              location.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      }
+    });
+  });
+
   if (document.getElementById("img")) {
     document.getElementById("img").addEventListener("change", function (e) {
       const formData = new FormData();
@@ -103,5 +140,29 @@
       }
     });
   });
+  const handleLike = async (e) => {
+    const twitId = e.target.parentNode.parentNode.children[2].value
+      .trim()
+      .toString();
+
+    if (twitId) {
+      const config = {
+        method: "post",
+        url: `/like`,
+        data: {
+          twitId: twitId,
+        },
+      };
+
+      await axios(config)
+        .then((response) => {
+          console.log("response!~", response);
+          location.reload();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
 </script>
 {% endblock %}

@@ -52,7 +52,8 @@ textarea {
   }
 }
 .input-group {
-  margin-bottom: 15px;
+  width: 300px;
+  margin-bottom: 5px;
 }
 .input-group label {
   width: 25%;
@@ -60,18 +61,39 @@ textarea {
 }
 .input-group input {
   width: 70%;
+  height: 30px;
 }
 #join {
   float: right;
 }
-.profile {
-  width: 50%;
+.profile-wrap {
+  display: none;
+}
+#login {
+  font-size: 16px;
+  background: none;
+  border: none;
+}
+#login-form {
+  width: 550px;
   display: flex;
   justify-content: space-around;
+  align-items: center;
+}
+.profile-wrap-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 .user-name {
+  height: 30px;
+  display: flex;
+  align-items: center;
   font-weight: bold;
   font-size: 18px;
+  padding-right: 30px;
+  border-right: solid 1px black;
 }
 .count {
   font-weight: bold;
@@ -86,12 +108,36 @@ textarea {
   vertical-align: top;
 }
 @media screen and (min-width: 800px) {
+  .profile-wrap {
+    width: 360px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
   .timeline {
-    width: 500px;
+    width: 100%;
   }
 }
+.twit-content {
+  padding: 10px 0;
+}
+.twit-edit {
+  padding-top: 10px;
+}
+.twit-delete {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.twit-delete img {
+  width: 10px;
+  height: 10px;
+}
 #twit-form {
-  height: 150px;
+  height: 200px;
   padding: 10px;
   border-radius: 4px;
   background: var(--color-blue);
@@ -99,6 +145,7 @@ textarea {
 }
 #img-preview {
   max-width: 100%;
+  height: 250px;
 }
 #img-label {
   float: left;
@@ -117,6 +164,7 @@ textarea {
 }
 #twit {
   width: 100%;
+  height: 130px;
   min-height: 72px;
 }
 #twit-btn {
@@ -133,7 +181,10 @@ textarea {
   margin-bottom: 10px;
 }
 .twit-author {
-  display: inline-block;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
   font-weight: bold;
   margin-right: 10px;
 }
@@ -148,6 +199,7 @@ textarea {
 }
 .twit-img {
   text-align: center;
+  padding: 10px 0;
 }
 .twit-img img {
   max-width: 75%;

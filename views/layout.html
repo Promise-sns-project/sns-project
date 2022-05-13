@@ -19,19 +19,24 @@
           <span>PromiseSNS</span></a
         >
       </div>
-      <div class="profile">
-        {% if user and user.id %}
+      {% if user and user.id %}
+      <div class="profile-wrap">
+        {% if user.img %}
 
+        <img class="profile-wrap-img" src="{{user.img}}" />
+
+        {% else %} <img class="profile-wrap-img" src =
+        http://kaihuastudio.com/common/img/default_profile.png /> {% endif %}
         <span class="user-name">{{user.nick }}</span>
 
         <input id="my-id" type="hidden" value="{{user.id}}" />
-        <a id="my-profile" href="/{{user.id}}/guestBook" class="btn"
-          >내 프로필</a
-        >
-        <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
-        <a href="/favor" class="btn">#해시태그</a>
-        {% else %}
-        <form id="login-form" action="/auth/login" method="post">
+        <a id="my-profile" href="/{{user.id}}/guestBook">내 프로필</a>
+        <a id="logout" href="/auth/logout">로그아웃</a>
+        <a href="/favor">#해시태그</a>
+      </div>
+      {% else %}
+      <form id="login-form" action="/auth/login" method="post">
+        <div>
           <div class="input-group">
             <label for="email">이메일</label>
             <input id="email" type="email" name="email" required autofocus />
@@ -40,12 +45,12 @@
             <label for="password">비밀번호</label>
             <input id="password" type="password" name="password" required />
           </div>
-          <a id="join" href="/join" class="btn">회원가입</a>
-          <button id="login" type="submit" class="btn">로그인</button>
-          <a id="kakao" href="/auth/kakao" class="btn">카카오톡</a>
-        </form>
-        {% endif %}
-      </div>
+        </div>
+        <a id="join" href="/join">회원가입</a>
+        <button id="login" type="submit">로그인</button>
+        <a id="kakao" href="/auth/kakao">카카오톡</a>
+      </form>
+      {% endif %}
     </div>
     <div class="container">{% block content %} {% endblock %}</div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

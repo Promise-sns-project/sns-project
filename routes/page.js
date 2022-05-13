@@ -48,12 +48,15 @@ router.get("/:id/guestBook", isLoggedIn, async (req, res, next) => {
       });
       res.render("guestBook", {
         title: "guestBook page",
+        //nowuserId는 현재 보고있는 방명록 주인의 id
+        nowuserId: req.params.id,
         user: targetUser,
         userNick: targetUser.nick,
         writer: req.user.nick,
         login_user: req.user,
         guestBooks,
         login_user: req.user,
+        profileImg: targetUser.img,
       });
     } else {
       res.status(404).send("no user");
@@ -67,13 +70,20 @@ router.get("/:id/guestBook", isLoggedIn, async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     const posts = await Post.findAll({
-      include: {
-        model: User,
-        attributes: ["id", "nick"],
-      },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "nick", "img"],
+        },
+        {
+          model: User,
+          as: "post_like",
+        },
+      ],
       order: [["createdAt", "DESC"]],
     });
-    res.render("main", {
+
+    await res.render("main", {
       title: "prj-name",
       twits: posts,
     });
