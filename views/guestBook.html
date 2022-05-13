@@ -103,33 +103,41 @@
           {% endif %}
           {%if user.id == login_user.id%}
           <div>
-            <form id = "profile-form" action="/user/profile" method="post">
-              <input name="nick"> <button class= "btn">닉네임 변경</button>
-            </form>
-            <form id = "profileImg-form" action="/user/profileImg" method="post" enctype="multipart/form-data">
-              <div class="img-preview">
-                <img
-                  id="img-preview"
-                  src=""
-                  style="display: none"
-                  width="250"
-                  alt="미리보기"
-                />
-                <input id="img-url" type="hidden" name="url" />
-              </div>
-              <div>
-                <label id="img-label" for="img">사진 업로드</label>
-                <input id="img" type="file" accept="image/*" />
-                <button id="profile-btn" type="submit" class="btn">게시</button>
-              </div>
-              
-            
-            </form>
+            <button id = "profileChange-btn" class="btn">프로필 변경</button>
+
+       
           </div>
           {% endif %}
       </div>
     </div>
+
+    <div class="profileChange-div hidden">
+      <h2>프로필 수정</h2>
+      <form id = "profile-form" action="/user/profile" method="post">
+        <input placeholder="변경할 닉네임을 작성하세요" name="nick"> <button class= "btn">입력</button>
+      </form>
+      <form id = "profileImg-form" action="/user/profileImg" method="post" enctype="multipart/form-data">
+        <div class="img-preview">
+          <img
+            id="img-preview"
+            src=""
+            style="display: none"
+            width="250"
+            alt="미리보기"
+          />
+          <input id="img-url" type="hidden" name="url" />
+        </div>
+        <div>
+          <label id="img-label" for="img">사진 선택</label>
+          <input id="img" type="file" accept="image/*" />
+          <button id="profile-btn" type="submit" class="btn">변경</button>
+        </div>
+        
+      
+      </form>
+    </div>
     <!-- <h3>user : {{following}}</h3> -->
+    <h1 style ="margin-top: 40px;">방명록</h1>
     <div class="input-container">
       <form
         id="twit-form"
@@ -199,13 +207,13 @@
         <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
         <div class="twit-createAt">{{guestBook.createdAt}}</div>
         {% if guestBook.writer == login_user.nick or userNick == login_user.nick %}
-        <div>
+        <div style="display:flex; align-items:center;">
           <button 
-          style="background-color: red;"
+
           type="submit"
-          class="btn btn-secondary"
+          class="btn btn-secondary deleteBtn"
           onclick="location.href='/guestBook/delete/{{guestBook.id}}/{{nowuserId}}'">
-          삭제
+          <img src = "/x.png" width="12px" height="12px"/>
         </button>
         </div>
         {% endif %}
@@ -339,6 +347,23 @@
         });
     });
   }
+
+
+  const profileChangeBtn =  document.getElementById("profileChange-btn");
+  const profileChangeBox =  document.querySelector(".profileChange-div")
+  const showChangeProfile = () => {
+    console.log("profileChangeBtn click") 
+    profileChangeBox.classList.toggle("hidden");
+
+    if(profileChangeBox.classList.contains("hidden")){
+      profileChangeBtn.innerText = "프로필 변경"
+    }
+    else{
+      profileChangeBtn.innerText = "취소"
+    }
+  }
+
+  profileChangeBtn.addEventListener("click", showChangeProfile);
 
 
     </script>

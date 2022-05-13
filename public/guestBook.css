@@ -94,7 +94,7 @@ body {
 
 .btn {
   width: 60px;
-  height: 42px;
+  height: 37px;
   border-radius: 5px;
   /* margin: 0px 20px; */
   background-color: var(--color-dark-blue);
@@ -102,6 +102,9 @@ body {
   color: white;
   font-size: var(--font-size-btn);
   cursor: pointer;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .img-preview {
@@ -182,4 +185,41 @@ body {
   background-color: var(--color-dark-blue);
   cursor: pointer;
   color: white;
+}
+
+#profileChange-btn {
+  width: 80px;
+  height: 40px;
+  margin-top: 30px;
+}
+
+.profileChange-div {
+  padding: 30px 0px;
+}
+
+.hidden {
+  display: none;
+}
+
+#profile-form {
+  display: flex;
+  margin: 50px 0px 20px 0px;
+}
+
+#profile-form input {
+  width: 200px;
+}
+
+.twit-author {
+  display: flex;
+  align-items: center;
+}
+
+.deleteBtn {
+  width: 10px;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
 }
