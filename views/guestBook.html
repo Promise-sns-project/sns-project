@@ -266,9 +266,39 @@
       }
 
       document.querySelectorAll(".twit-createAt").forEach(function (x) {
-        // console.log(date);
-        // console.log("date:", date.innerText.slice(0, 24));
-        x.innerText = x.innerText.slice(0, 21);
+        var year = x.innerText.slice(11,15);
+        var month = x.innerText.slice(4,7);
+        var date = x.innerText.slice(8,10);
+        var time = x.innerText.slice(16, 21);
+
+        if(month==="Jan"){
+          month = "1월";
+        } else if(month==="Feb"){
+          month = "2월";
+        } else if(month==="Mar"){
+          month = "3월";
+        } else if(month==="Apr"){
+          month = "4월";
+        } else if(month==="May"){
+          month = "5월";
+        } else if(month==="Jun"){
+          month = "6월";
+        } else if(month==="Jul"){
+          month = "7월";
+        } else if(month==="Aug"){
+          month = "8월";
+        } else if(month==="Sep"){
+          month = "9월";
+        } else if(month==="Oct"){
+          month = "10월";
+        } else if(month==="Nov"){
+          month = "11월";
+        } else if(month==="Dec"){
+          month = "12월";
+        }
+
+        var day = year + "년 " + month + " " + date + "일 " + time
+        x.innerText = day;
       });
 
       //const fulldate = date.innerText.slice(0, 24);
