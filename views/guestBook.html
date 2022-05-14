@@ -196,41 +196,44 @@
     <div class="twits">
       
       {% for guestBook in guestBooks %}
-      <div class="twit">
+      <div class="twit guestBookTwit">
         <input type="hidden" value="{{guestBook.id}}" class="twit-id" />
         <div
-          class="twit-author pointer"
+          class="twit-author pointer guestBookWriter"
           onclick="handleClick(event, `{{guestBook.UserId}}`)"
         >
           {{guestBook.writer}}
         </div>
         <div class="twit-content">{{guestBook.content}}</div>
         <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
-        <div id="twit-createAt" class="twit-createAt">{{guestBook.createdAt}}</div>
+        <div id="twit-createAt" class="twit-createAt createdTime">{{guestBook.createdAt}}</div>
         {% if guestBook.UserId == login_user.id or userNick == login_user.nick %}
         <!-- 방명록을 쓴 User 이거나 내 방명록 페이지면 -> 수정삭제 가능 -->
+        <div style="display:flex; align-items:center;">
         <button 
-          id="modify"
+          id="modifyDeleteBtn"
           type="submit"
           class="btn btn-secondary"
           onclick="clickModify(event)">
           수정
         </button>
+        </div>
         <div style="display:flex; align-items:center;">
           <button 
-          id="deleteBtn"
+          id="modifyDeleteBtn"
           type="submit"
           class="btn btn-secondary deleteBtn"
           onclick="location.href='/guestBook/delete/{{guestBook.id}}/{{nowuserId}}'">
-          <img src = "/x.png" width="12px" height="12px"/>
+          <!-- <img src = "/x.png" width="12px" height="12px"/> -->
+          삭제
           </button>
-            <form value="hi"id=inputForm style="display: none;" action="/guestBook/update/{{guestBook.id}}/{{nowuserId}}" method="post">
+            <form value="hi"id=inputForm class="modifyForm" style="display: none;" action="/guestBook/update/{{guestBook.id}}/{{nowuserId}}" method="post">
               <table>
                   <tr>
-                      <td><input type="text" name="contentUpdate" ></td>
+                      <td><input type="text" name="contentUpdate" style="width:400px" ></td>
                   </tr>
               </table>
-              <input type="submit" value="수정완료">
+              <input type="submit" class="btn" value="수정완료">
             </form>
         </div>
         {% endif %}
@@ -249,11 +252,13 @@
     {% block script %}
     <script>
       function clickModify(e) {
-      const target = e.target.parentNode.children[5].children[1];
+        console.log(e.target.parentNode.parentNode.children[5].children[0]);
+      const target = e.target.parentNode.parentNode.children[5].children[1];
         target.style.display = "inline"; //inputForm
-        target.parentNode.children[0].style.display = "none"; //deleteBtn
+        e.target.parentNode.parentNode.children[5].children[0].style.display = "none"; //deleteBtn
         e.target.style.display = "none"; //modify
-        e.target.parentNode.children[3].style.display = "none"; //twit-createAt
+        e.target.parentNode.parentNode.children[3].style.display = "none"; //twit-createAt
+        e.target.parentNode.parentNode.children[2].style.display = "none";
       }
 
       function clickmodifyCancel(){
