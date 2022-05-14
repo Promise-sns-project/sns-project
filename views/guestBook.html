@@ -208,7 +208,9 @@
         <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
         <div id="twit-createAt" class="twit-createAt createdTime">{{guestBook.createdAt}}</div>
         {% if guestBook.UserId == login_user.id or userNick == login_user.nick %}
-        <!-- 방명록을 쓴 User 이거나 내 방명록 페이지면 -> 수정삭제 가능 -->
+        <!-- 방명록을 쓴 User 이거나 내 방명록 페이지면 삭제가능 -->
+        <!-- 수정은 방명록 쓴 User만 가능 -->
+        {% if guestBook.UserId == login_user.id %}
         <div style="display:flex; align-items:center;">
         <button 
           id="modifyDeleteBtn"
@@ -218,6 +220,7 @@
           수정
         </button>
         </div>
+        {% endif %}
         <div style="display:flex; align-items:center;">
           <button 
           id="modifyDeleteBtn"
@@ -259,17 +262,6 @@
         e.target.style.display = "none"; //modify
         e.target.parentNode.parentNode.children[3].style.display = "none"; //twit-createAt
         e.target.parentNode.parentNode.children[2].style.display = "none";
-      }
-
-      function clickmodifyCancel(){
-        document.getElementById("inputForm").style.display = "none";
-        document.getElementById("deleteBtn").style.display = "inline";
-        document.getElementById("modify").style.display = "inline";
-      }
-
-      function clickOK() {
-        document.getElementById("modify").style.display = "inline";
-        document.getElementById("input").style.display = "none";
       }
 
       document.querySelectorAll(".twit-createAt").forEach(function (x) {
