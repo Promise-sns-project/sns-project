@@ -87,7 +87,9 @@
         <div class="twit-content">{{twit.content}}</div>
         <!-- 🧡 -->
         <div class="twit-edit">
-          <span id="like" onclick="handleLike(event)"> ❤️ </span>
+          <span id="like" style="cursor: pointer" onclick="handleLike(event)">
+            ❤️
+          </span>
           <span>{{twit.post_like.length}}</span>
         </div>
       </div>
@@ -156,7 +158,8 @@
     });
   });
   const handleLike = async (e) => {
-    const twitId = e.target.parentNode.parentNode.children[2].value
+    console.log(e.target.parentNode.parentNode.parentNode.children[1].value);
+    const twitId = e.target.parentNode.parentNode.parentNode.children[1].value
       .trim()
       .toString();
 
