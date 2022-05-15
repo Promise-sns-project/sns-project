@@ -86,6 +86,7 @@ router.get("/", async (req, res, next) => {
     await res.render("main", {
       title: "prj-name",
       twits: posts,
+      login_user: req.user,
     });
   } catch (err) {
     console.error(err);

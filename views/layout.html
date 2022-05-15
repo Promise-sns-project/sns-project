@@ -23,14 +23,14 @@
       <div class="profile-wrap">
         {% if user.img %}
 
-        <img class="profile-wrap-img" src="{{user.img}}" />
+        <img class="profile-wrap-img" src="{{login_user.img}}" />
 
         {% else %} <img class="profile-wrap-img" src =
         http://kaihuastudio.com/common/img/default_profile.png /> {% endif %}
-        <span class="user-name">{{user.nick }}</span>
+        <span class="user-name">{{login_user.nick }}</span>
 
-        <input id="my-id" type="hidden" value="{{user.id}}" />
-        <a id="my-profile" href="/{{user.id}}/guestBook">내 프로필</a>
+        <input id="my-id" type="hidden" value="{{login_user.id}}" />
+        <a id="my-profile" href="/{{login_user.id}}/guestBook">내 프로필</a>
         <a id="logout" href="/auth/logout">로그아웃</a>
         <a href="/favor">#해시태그</a>
       </div>
