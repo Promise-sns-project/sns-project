@@ -79,6 +79,7 @@
          src = http://kaihuastudio.com/common/img/default_profile.png />
 
       {% endif %}
+      <input type="hidden" value="{{user.id}}" class="user-id" />
       <input type="hidden" value="{{login_user.id}}" class="login-user-id" />
       <div class="profile-info">
         <div class="nickname">{{userNick}}</div>
@@ -338,7 +339,7 @@
    
           console.log("follow버튼 클릭")
           const guestBook_Id = document.querySelector(".user-id");
-          console.log("guestBook_Id:", guestBook_Id.value)
+          console.log("guestBook_Id:", guestBook_Id)
           if (guestBook_Id) {
             const userId = document.querySelector(".login-user-id").value;
             console.log("userId:", userId)
