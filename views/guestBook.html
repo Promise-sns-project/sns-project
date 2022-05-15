@@ -80,6 +80,7 @@
 
       {% endif %}
       <input type="hidden" value="{{login_user.id}}" class="login-user-id" />
+      <input type="hidden" value="{{user.id}}" class="user-id" />
       <div class="profile-info">
         <div class="nickname">{{userNick}}</div>
         <div class="follow-info">
@@ -325,9 +326,13 @@
       }
       document.querySelectorAll(".guest-follow-btn").forEach(function (tag) {
         tag.addEventListener("click", function () {
-          const guestBook_Id = document.querySelector("#my-id");
+
+          console.log("follow버튼 클릭")
+          const guestBook_Id = document.querySelector(".user-id");
+          console.log("guestBook_Id:", guestBook_Id.value)
           if (guestBook_Id) {
             const userId = document.querySelector(".login-user-id").value;
+            console.log("userId:", userId)
             if (userId !== guestBook_Id.value) {
               if (confirm("팔로잉하시겠습니까?")) {
                 axios
@@ -345,7 +350,8 @@
       });
       document.querySelectorAll(".guest-unfollow-btn").forEach(function (tag) {
         tag.addEventListener("click", function () {
-          const guestBook_Id = document.querySelector("#my-id");
+          // const guestBook_Id = document.querySelector("#my-id");
+          const guestBook_Id = document.querySelector(".user-id");
           if (guestBook_Id) {
             const userId = document.querySelector(".login-user-id").value;
             if (userId !== guestBook_Id.value) {
