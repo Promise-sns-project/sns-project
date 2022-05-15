@@ -19,9 +19,9 @@
           <span>PromiseSNS</span></a
         >
       </div>
-      {% if user and user.id %}
+      {% if login_user and login_user.id %}
       <div class="profile-wrap">
-        {% if user.img %}
+        {% if login_user.img %}
 
         <img class="profile-wrap-img" src="{{login_user.img}}" />
 

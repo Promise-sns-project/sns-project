@@ -100,15 +100,27 @@ router.get("/hashtag", async (req, res, next) => {
     return res.redirect("/");
   }
   try {
-    const hashtag = await Hashtag.findOne({ where: { title: query } });
+    const hashtag = await Hashtag.findOne({
+      where: { title: query },
+    });
     let posts = [];
+
     if (hashtag) {
-      posts = await hashtag.getPosts({ include: [{ model: User }] });
+      posts = await hashtag.getPosts({
+        include: [
+          { model: User },
+          {
+            model: User,
+            as: "post_like",
+          },
+        ],
+      });
     }
 
     return res.render("main", {
       title: `${query} | NodeBird`,
       twits: posts,
+      login_user: req.user,
     });
   } catch (error) {
     console.error(error);
