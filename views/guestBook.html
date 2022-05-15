@@ -80,7 +80,6 @@
 
       {% endif %}
       <input type="hidden" value="{{login_user.id}}" class="login-user-id" />
-      <input type="hidden" value="{{user.id}}" class="user-id" />
       <div class="profile-info">
         <div class="nickname">{{userNick}}</div>
         <div class="follow-info">
@@ -237,7 +236,10 @@
                       <td><input type="text" name="contentUpdate" style="width:400px" ></td>
                   </tr>
               </table>
-              <input type="submit" class="btn" value="수정완료">
+              <div style="display: flex;">
+                <input type="submit" class="btn" value="수정완료">
+                <div style="margin-left: 10px;" class="btn" onclick="cancel(event)">취소</div>
+            </div>
             </form>
         </div>
         {% endif %}
@@ -256,7 +258,6 @@
     {% block script %}
     <script>
       function clickModify(e) {
-        console.log(e.target.parentNode.parentNode.children[5].children[0]);
       const target = e.target.parentNode.parentNode.children[5].children[1];
         target.style.display = "inline"; //inputForm
         e.target.parentNode.parentNode.children[5].children[0].style.display = "none"; //deleteBtn
@@ -264,7 +265,15 @@
         e.target.parentNode.parentNode.children[3].style.display = "none"; //twit-createAt
         e.target.parentNode.parentNode.children[2].style.display = "none";
       }
-
+      const cancel = (e) => {
+        const target = e.target.parentNode.parentNode;
+        target.style.display = "none";
+        console.log(target.parentNode.parentNode.children[5].children[0]);
+        target.parentNode.parentNode.children[5].children[0].style.display = "flex"; //deleteBtn
+        target.parentNode.parentNode.children[4].children[0].style.display = "flex"; //modify
+        target.parentNode.parentNode.children[3].style.display = "flex"; //twit-createAt
+        target.parentNode.parentNode.children[2].style.display = "flex";
+      }
       document.querySelectorAll(".twit-createAt").forEach(function (x) {
         var year = x.innerText.slice(11,15);
         var month = x.innerText.slice(4,7);
@@ -326,14 +335,14 @@
       }
       document.querySelectorAll(".guest-follow-btn").forEach(function (tag) {
         tag.addEventListener("click", function () {
-
+   
           console.log("follow버튼 클릭")
           const guestBook_Id = document.querySelector(".user-id");
           console.log("guestBook_Id:", guestBook_Id.value)
           if (guestBook_Id) {
             const userId = document.querySelector(".login-user-id").value;
             console.log("userId:", userId)
-            if (userId !== guestBook_Id.value) {
+                        if (userId !== guestBook_Id.value) {
               if (confirm("팔로잉하시겠습니까?")) {
                 axios
                   .post(`/user/${guestBook_Id.value}/follow`)

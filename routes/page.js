@@ -108,10 +108,9 @@ router.get("/hashtag", async (req, res, next) => {
     if (hashtag) {
       posts = await hashtag.getPosts({
         include: [
-          { model: User },
+          { model: User, as: "post_like" },
           {
             model: User,
-            as: "post_like",
           },
         ],
       });
