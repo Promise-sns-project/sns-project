@@ -148,7 +148,7 @@ textarea {
   height: 10px;
 }
 #twit-form {
-  height: 200px;
+  height: auto;
   padding: 10px;
   border-radius: 4px;
   background: var(--color-blue);
