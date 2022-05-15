@@ -65,6 +65,14 @@
     align-items: center;
   }
 
+  #favor button {
+    display: none;
+  }
+
+  #favor:hover button {
+    display: block;
+  }
+
   #myTagsDiv {
     padding-bottom: 80px;
   }
@@ -79,6 +87,17 @@
     justify-content: center;
     margin: 0px 8px;
     font-size: 22px;
+  }
+
+  #keywordRemoveBtn {
+    margin-left: 50px;
+    border: none;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
   }
 </style>
 {% endblock %} {% block content %}
@@ -104,7 +123,7 @@
         <div id="favor">
           <div id="tag">#</div>
           <span>{{favor}}</span>
-          <button onclick="remove(event)">x</button>
+          <button id="keywordRemoveBtn" onclick="remove(event)">x</button>
         </div>
       </div>
       {% endfor %}

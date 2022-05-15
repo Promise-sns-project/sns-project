@@ -244,18 +244,19 @@ body {
 }
 
 #modifyDeleteBtn {
-  width: 50px;
+  width: 33px;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  color: var(--color-dark-blue);
+  color: gray;
 }
 
 #modifyDeleteBtn:hover {
-  background-color: var(--color-dark-blue);
-  color: white;
+  /* background-color: var(--color-dark-blue); */
+  color: var(--color-dark-blue);
+  font-weight: bold;
 }
 
 .createdTime {
@@ -263,5 +264,5 @@ body {
 }
 
 #modifyForm input {
-  width: 500px;
+  width: 550px;
 }
