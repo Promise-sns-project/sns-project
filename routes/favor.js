@@ -11,9 +11,6 @@ router.post("/", isLoggedIn, async (req, res, next) => {
     const user = await User.findOne({ where: { id: req.user.id } });
 
     const favors = req.body.content.match(/#[^\s#]*/g);
-    for (i = 0; i < favors.length; i++) {
-      console.log("!!!!!!", favors[i].slice(1));
-    }
     if (favors) {
       const result = await Promise.all(
         favors.map((tag) => {
@@ -60,14 +57,12 @@ router.get("/", isLoggedIn, async (req, res, next) => {
         });
         favor_hashtags.push(...tmp);
       }
-      // console.log("!!!result!!", favor_hashtags);
 
       let ids = [];
       for (var i = 0; i < favor_hashtags.length; i++) {
         const tmp = await favor_hashtags[i].getPosts({
           include: [{ model: User }],
         });
-        // console.log(i, tmp);
         await tmp.forEach((m) => {
           if (!ids.includes(m.dataValues.id)) {
             result.add(m);
@@ -75,7 +70,6 @@ router.get("/", isLoggedIn, async (req, res, next) => {
           }
         });
       }
-      // console.log("twits!!", result);
       return res.render("hashtagPage", {
         title: `hashtagPage`,
         user,
@@ -111,10 +105,8 @@ router.post("/delete", isLoggedIn, async (req, res, next) => {
           target = user_favors[i];
         }
       }
-      // console.log("target", target.user_favor);
       await target.user_favor.destroy();
 
-      // console.log("target", target);
       await res.redirect("/favor");
     })();
   } catch (error) {
