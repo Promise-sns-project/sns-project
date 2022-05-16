@@ -4,12 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    /> -->
     <title>guestBook</title>
   </head>
 
@@ -137,7 +131,6 @@
       
       </form>
     </div>
-    <!-- <h3>user : {{following}}</h3> -->
     <h1 style ="margin-top: 40px;">방명록</h1>
     <div class="input-container">
       <form
@@ -155,7 +148,6 @@
             placeholder="방명록을 작성하세요."
           ></textarea>
           <input id="writer" type="hidden" value="{{writer}}" />
-          <!-- <label for="floatingTextarea">leave a comment</label> -->
         </div>
         <div class="img-preview">
           <img
@@ -169,9 +161,6 @@
         </div>
         <div class="btns-div">
           <div class="img-inputBox">
-            <!-- <label for="formFile" id="img-label" class="form-label"
-              >사진 업로드</label
-            > -->
             <input
               id="formFile"
               class="img-input"
@@ -180,9 +169,6 @@
               accept="image/*"
               style="display: none"
             />
-            <!-- <div class="input-file-button">
-              <label for="formFile"> 사진 추가</label>
-            </div> -->
           </div>
 
           <div>
@@ -205,7 +191,6 @@
           {{guestBook.writer}}
         </div>
         <div class="twit-content">{{guestBook.content}}</div>
-        <!-- <div class="twit-createAt">{{guestBook.createdAt}}</div> -->
         <div id="twit-createAt" class="twit-createAt createdTime">{{guestBook.createdAt}}</div>
         {% if guestBook.UserId == login_user.id or userNick == login_user.nick %}
         <!-- 방명록을 쓴 User 이거나 내 방명록 페이지면 삭제가능 -->
@@ -227,7 +212,6 @@
           type="submit"
           class="btn btn-secondary deleteBtn"
           onclick="location.href='/guestBook/delete/{{guestBook.id}}/{{nowuserId}}'">
-          <!-- <img src = "/x.png" width="12px" height="12px"/> -->
           삭제
           </button>
             <form value="hi"id=inputForm class="modifyForm" style="display: none;" action="/guestBook/update/{{guestBook.id}}/{{nowuserId}}" method="post">
@@ -245,9 +229,6 @@
         {% endif %}
         {% if guestBook.img %}
       
-          <!-- <div class="twit-img">
-            <img src="{{guestBook.img}}" alt="섬네일" />
-          </div> -->
         </div>
         {% endif %}
       </div>
@@ -268,7 +249,6 @@
       const cancel = (e) => {
         const target = e.target.parentNode.parentNode;
         target.style.display = "none";
-        console.log(target.parentNode.parentNode.children[5].children[0]);
         target.parentNode.parentNode.children[5].children[0].style.display = "flex"; //deleteBtn
         target.parentNode.parentNode.children[4].children[0].style.display = "flex"; //modify
         target.parentNode.parentNode.children[3].style.display = "flex"; //twit-createAt
@@ -310,16 +290,12 @@
         x.innerText = day;
       });
 
-      //const fulldate = date.innerText.slice(0, 24);
-      //console.log(date.getMonth());
 
       if (document.getElementById("formFile")) {
-        console.log("!!!!!!!!!!!!!!");
         document
           .getElementById("formFile")
           .addEventListener("change", function (e) {
             const formData = new FormData();
-            console.log(this, this.files);
             formData.append("img", this.files[0]);
             axios
               .post("/guestBook/img", formData)
@@ -335,13 +311,10 @@
       }
       document.querySelectorAll(".guest-follow-btn").forEach(function (tag) {
         tag.addEventListener("click", function () {
-   
-          console.log("follow버튼 클릭")
+  
           const guestBook_Id = document.querySelector(".user-id");
-          console.log("guestBook_Id:", guestBook_Id.value)
           if (guestBook_Id) {
             const userId = document.querySelector(".login-user-id").value;
-            console.log("userId:", userId)
                         if (userId !== guestBook_Id.value) {
               if (confirm("팔로잉하시겠습니까?")) {
                 axios
@@ -359,7 +332,6 @@
       });
       document.querySelectorAll(".guest-unfollow-btn").forEach(function (tag) {
         tag.addEventListener("click", function () {
-          // const guestBook_Id = document.querySelector("#my-id");
           const guestBook_Id = document.querySelector(".user-id");
           if (guestBook_Id) {
             const userId = document.querySelector(".login-user-id").value;
@@ -410,12 +382,10 @@
       if (document.getElementById("img")) {
     document.getElementById("img").addEventListener("change", function (e) {
       const formData = new FormData();
-      console.log(this, this.files);
       formData.append("img", this.files[0]);
       axios
         .post("/user/img", formData)
         .then((res) => {
-          console.log(res);
           document.getElementById("img-url").value = res.data.url;
           document.getElementById("img-preview").src = res.data.url;
           document.getElementById("img-preview").style.display = "inline";
@@ -430,7 +400,6 @@
   const profileChangeBtn =  document.getElementById("profileChange-btn");
   const profileChangeBox =  document.querySelector(".profileChange-div")
   const showChangeProfile = () => {
-    console.log("profileChangeBtn click") 
     profileChangeBox.classList.toggle("hidden");
 
     if(profileChangeBox.classList.contains("hidden")){

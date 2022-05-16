@@ -86,10 +86,16 @@ textarea {
   border: none;
 }
 #login-form {
-  width: 550px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  display: none;
+}
+
+@media screen and (min-width: 950px) {
+  #login-form {
+    width: 550px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 .profile-wrap-img {
   width: 50px;

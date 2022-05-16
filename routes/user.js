@@ -82,7 +82,6 @@ router.post("/basicProfile", isLoggedIn, async (req, res, next) => {
 });
 
 router.post("/img", isLoggedIn, upload.single("img"), (req, res) => {
-  console.log("req.file :", req.file);
   res.json({ url: `/img/${req.file.filename}` });
 });
 
@@ -92,8 +91,6 @@ router.post(
   isLoggedIn,
   upload2.none(),
   async (req, res, next) => {
-    console.log("url:", req.body.url);
-
     try {
       await User.update(
         { img: req.body.url },
@@ -101,7 +98,6 @@ router.post(
           where: { id: req.user.id },
         }
       );
-      // res.status(200).json();
       res.redirect(`/${req.user.id}/guestBook`);
     } catch (error) {
       console.error(error);
