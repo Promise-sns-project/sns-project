@@ -1,7 +1,9 @@
 # Promise-SNS-Project
+
 <br>
 
-## Node.js express 서버로 개발한 **웹 소셜미디어 서비스**
+### Node.js express 서버로 개발한 **웹 소셜미디어 서비스**
+
 <br>
 
 ## 시연 이미지
@@ -14,12 +16,15 @@
 
 <img width="470" alt="image" src="https://user-images.githubusercontent.com/73461032/215667470-897e9053-ba6e-48dd-a1c6-ea95d856238f.png">
 
+<br><br>
 
 ## 주요 기능
 
 - 게시글 CRUD 및 좋아요
 - 해시태그 키워드 팔로우 및 모아보기
 - 타 이용자 팔로우 기능
+
+<br><br>
 
 ## 기술 스택
 
